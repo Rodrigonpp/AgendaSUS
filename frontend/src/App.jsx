@@ -1,20 +1,15 @@
+// HOOKS
 import { useState } from "react";
-import agendasus from "./assets/agendasus.svg";
-import "./App.css";
 import { Outlet } from "react-router";
+// COMPONENTS
+import Header from "./components/Header.jsx";
+// STYLES
+import "./App.css";
 
 function App() {
   return (
     <div>
-      <header>
-        <div className="header-container">
-          <img src={agendasus} alt="Logo AgendaSUS" />
-          <h2>
-            <span className="green">Agenda</span>
-            <span className="blue">SUS</span>
-          </h2>
-        </div>
-      </header>
+      <Header />
       <Outlet />
     </div>
   );
