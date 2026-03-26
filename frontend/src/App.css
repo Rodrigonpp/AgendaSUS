@@ -1,0 +1,28 @@
+header {
+  height: 100px;
+  box-shadow: 0px 4px 6px #00000040;
+  padding: 0 1rem;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-container img {
+  width: 100px;
+  height: 100px;
+}
+
+.header-container h2 {
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.blue {
+  color: #2581b2;
+}
+
+.green {
+  color: #35a56c;
+}
