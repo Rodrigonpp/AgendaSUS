@@ -5,3 +5,11 @@ body {
     rgba(40, 131, 181, 0.7) 100%
   );
 }
+
+.blue {
+  color: #2581b2;
+}
+
+.green {
+  color: #35a56c;
+}

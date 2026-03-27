@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 // ASSETS
 import agendasus from "../assets/agendasus.svg";
-import google_icon from "../assets/google-icon.svg"
+import google_icon from "../assets/google-icon.svg";
 // STYLES
-import "./LoginView.css"
+import "./LoginView.css";
+import { useNavigate } from "react-router";
 
 const LoginView = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="login-view">
       <section className="presentation-container">
@@ -19,7 +22,10 @@ const LoginView = () => {
           </div>
           <div className="text">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos commodi neque reprehenderit aspernatur, deleniti quis asperiores ex quasi, dicta exercitationem odit aperiam rem minus! Minima pariatur voluptas quisquam fugiat perferendis.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Dignissimos commodi neque reprehenderit aspernatur, deleniti quis
+              asperiores ex quasi, dicta exercitationem odit aperiam rem minus!
+              Minima pariatur voluptas quisquam fugiat perferendis.
             </p>
           </div>
         </div>
@@ -28,17 +34,37 @@ const LoginView = () => {
         <form className="login">
           <h3>Identifique-se com:</h3>
           <label htmlFor="email">
-            E-mail:
-            <input type="text" required placeholder="Digite seu e-mail..." name="email" className="email" />
+            <span>E-mail:</span>
+            <input
+              type="email"
+              required
+              placeholder="Digite seu e-mail..."
+              name="email"
+              id="email"
+            />
           </label>
-          <label htmlFor="password" >
-            E-mail:
-            <input type="password" name="password" id="password" required placeholder="Digite sua senha..." />
+          <label htmlFor="password">
+            <span>Senha:</span>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              placeholder="Digite sua senha..."
+            />
           </label>
-          <button type="submit">Entrar</button>
+          <button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("agendar");
+            }}
+          >
+            Entrar
+          </button>
           <span className="forget-password">Esqueceu a senha?</span>
           <div className="login-methods">
-            <span>Ou entrar com:</span>
+            <span className="enter-with">Ou entrar com:</span>
             <div className="login-with-google">
               <img src={google_icon} alt="Google logo" />
               <span>Google</span>
@@ -47,7 +73,7 @@ const LoginView = () => {
         </form>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default LoginView
+export default LoginView;
