@@ -12,6 +12,7 @@ const Header = () => {
     <header>
       <div className="header-container">
         <img src={agendasus} alt="Logo AgendaSUS" onClick={() => navigate("/")} className="header-logo"/>
+        {/* LEMBRAR DE CONFIGURAR QUANDO TIVER USUARIO, REMOVER O LINK */}
         <h2>
           <span className="green">Agenda</span>
           <span className="blue">SUS</span>

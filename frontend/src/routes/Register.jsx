@@ -9,6 +9,10 @@ import backIcon from "../assets/back-icon.svg";
 const Register = () => {
   const navigate = useNavigate();
   const [cpf, setCpf] = useState("");
+  const [date, setDate] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="login-view">
@@ -33,7 +37,69 @@ const Register = () => {
               value={cpf || ""}
               onValueChange={(value) => {
                 setCpf(value.value);
-                console.log(cpf);
+              }}
+            />
+          </label>
+          <label htmlFor="birth-date">
+            <span>
+              Data de nascimento: <span className="required">*</span>
+            </span>
+            <input
+              type="date"
+              name="birth-date"
+              id="birth-date"
+              required
+              value={date}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+          </label>
+          <label htmlFor="username">
+            <span>
+              Nome de usuário: <span className="required">*</span>
+            </span>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              required
+              placeholder="Digite um nome de usuário..."
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
+          </label>
+          <label htmlFor="email">
+            <span>
+              E-mail: <span className="required">*</span>
+            </span>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              placeholder="Digite seu e-mail..."
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+          </label>
+          <label htmlFor="password">
+            <span>
+              Senha: <span className="required">*</span>
+            </span>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              required
+              placeholder="Crie sua senha..."
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
               }}
             />
           </label>
