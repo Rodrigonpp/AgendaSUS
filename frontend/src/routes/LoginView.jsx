@@ -1,37 +1,28 @@
-import React from "react";
+import { useState } from "react";
 // ASSETS
-import agendasus from "../assets/agendasus.svg";
 import google_icon from "../assets/google-icon.svg";
 // STYLES
 import "./LoginView.css";
 import { useNavigate } from "react-router";
+// COMPONENTS
+import Presentation from "../components/Presentation";
 
 const LoginView = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="login-view">
-      <section className="presentation-container">
-        <div className="presentation">
-          <div className="brand-title">
-            <img src={agendasus} alt="AgendaSUS logo" />
-            <h2>
-              <span className="green">Agenda</span>
-              <span className="blue">SUS</span>
-            </h2>
-          </div>
-          <div className="text">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Dignissimos commodi neque reprehenderit aspernatur, deleniti quis
-              asperiores ex quasi, dicta exercitationem odit aperiam rem minus!
-              Minima pariatur voluptas quisquam fugiat perferendis.
-            </p>
-          </div>
-        </div>
-      </section>
+      <Presentation />
       <section className="login-container">
-        <form className="login">
+        <form
+          className="login"
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate("agendar");
+          }}
+        >
           <h3>Identifique-se com:</h3>
           <label htmlFor="email">
             <span>E-mail:</span>
@@ -41,6 +32,10 @@ const LoginView = () => {
               placeholder="Digite seu e-mail..."
               name="email"
               id="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </label>
           <label htmlFor="password">
@@ -51,17 +46,13 @@ const LoginView = () => {
               id="password"
               required
               placeholder="Digite sua senha..."
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </label>
-          <button
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate("agendar");
-            }}
-          >
-            Entrar
-          </button>
+          <button type="submit">Entrar</button>
           <span className="forget-password">Esqueceu a senha?</span>
           <div className="login-methods">
             <span className="enter-with">Ou entrar com:</span>
@@ -70,6 +61,12 @@ const LoginView = () => {
               <span>Google</span>
             </div>
           </div>
+          <span
+            className="forget-password register-span"
+            onClick={() => navigate("cadastrar")}
+          >
+            Registre-se aqui!
+          </span>
         </form>
       </section>
     </div>
