@@ -5,6 +5,8 @@ import { PatternFormat } from "react-number-format";
 import Presentation from "../components/Presentation";
 // ASSETS
 import backIcon from "../assets/back-icon.svg";
+// STYLES
+import "./Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,10 +19,15 @@ const Register = () => {
   return (
     <div className="login-view">
       <Presentation />
-      <section className="login-container">
+      <section className="login-container" id="register-container">
         <form className="register-form">
           <div className="title-container">
-            <img src={backIcon} alt="Voltar" className="back-icon" />
+            <img
+              src={backIcon}
+              alt="Voltar"
+              className="back-icon"
+              onClick={() => navigate("/")}
+            />
             <h3>Cadastre-se</h3>
           </div>
           <label htmlFor="cpf">
@@ -103,7 +110,9 @@ const Register = () => {
               }}
             />
           </label>
-          <button type="submit">Concluído</button>
+          <button type="submit" id="finish-register">
+            Concluído
+          </button>
         </form>
       </section>
     </div>
