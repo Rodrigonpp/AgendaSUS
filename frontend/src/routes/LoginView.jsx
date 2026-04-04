@@ -1,4 +1,6 @@
-import { useState } from "react";
+// HOOKS
+import { useEffect, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 // ASSETS
 import google_icon from "../assets/google-icon.svg";
 // STYLES
@@ -11,6 +13,11 @@ const LoginView = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isAuth, authenticate } = useAuth();
+
+  useEffect(() => {
+    if (isAuth) navigate("agendar");
+  }, [isAuth]);
 
   return (
     <div className="login-view">
@@ -20,10 +27,16 @@ const LoginView = () => {
           className="login"
           onSubmit={(e) => {
             e.preventDefault();
-            navigate("agendar");
+            authenticate(email, password);
           }}
         >
           <h3>Identifique-se com:</h3>
+          <p
+            className="invalid-credentials"
+            style={{ opacity: isAuth === false ? 1 : 0 }}
+          >
+            Credenciais inválidas! Tente novamente ou cadastre-se.
+          </p>
           <label htmlFor="email">
             <span>E-mail:</span>
             <input

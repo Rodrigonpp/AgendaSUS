@@ -1,28 +1,23 @@
 import { useState, useEffect } from "react";
+import { useBD } from "../hooks/useBD";
 
 const ScheduleView = () => {
-  const [users, setUsers] = useState([]);
+  const url =
+    "http://192.168.1.73:81/api/users/search?email=cg203@gmail.com";
+  const { user, getUser } = useBD();
 
   useEffect(() => {
-    fetch("http://192.168.1.73:81/users")
-      .then((response) => response.json())
-      .then((data) => {
-        setUsers(data);
-      });
+    getUser(url);
   }, []);
+
+  if (!user) return <h2>Carregando dados de usuário...</h2>;
 
   return (
     <div>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>
-            <h4>{user.id} - {user.user_name}</h4>
-            <p>{user.cpf}</p>
-            <p>{user.email}</p>
-            <p>{user.senha}</p>
-          </li>
-        ))}
-      </ul>
+      <h2>{user?.user_name}</h2>
+      <h2>{user?.cpf}</h2>
+      <h2>{user?.email}</h2>
+      <h2>{user?.password}</h2>
     </div>
   );
 };
