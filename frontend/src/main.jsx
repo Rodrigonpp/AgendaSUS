@@ -9,17 +9,20 @@ import "./index.css";
 import LoginView from "./routes/LoginView.jsx";
 import ScheduleView from "./routes/ScheduleView.jsx";
 import Register from "./routes/Register.jsx";
+import { SessionContextProvider } from "./context/SessionContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <StrictMode>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="/" element={<LoginView />} />
-          <Route path="agendar" element={<ScheduleView />} />
-          <Route path="cadastrar" element={<Register/>}/>
-        </Route>
-      </Routes>
-    </StrictMode>
-  </BrowserRouter>,
+  <StrictMode>
+    <SessionContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="/" element={<LoginView />} />
+            <Route path="agendar" element={<ScheduleView />} />
+            <Route path="cadastrar" element={<Register />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </SessionContextProvider>
+  </StrictMode>,
 );
