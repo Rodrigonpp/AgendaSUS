@@ -4,18 +4,17 @@ export function useBD() {
   const [users, setUsers] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
-  const url = "http://192.168.1.73:81/api/users";
+  const [finished, setFinished] = useState(false);
+  const [isRegistered, setIsRegistered] = useState();
 
   const getUsers = async () => {
-    setLoading(true);
     try {
-      const response = await fetch(url);
+      const response = await fetch("http://192.168.1.73:8080/api/users");
       const data = await response.json();
       setUsers(data);
     } catch (error) {
       console.log("Erro: ", error);
     } finally {
-      setLoading(false);
     }
   };
 
@@ -29,5 +28,35 @@ export function useBD() {
     }
   };
 
-  return { users, user, loading, getUsers, getUser };
+  const addUser = async (credentials) => {
+    try {
+      setFinished(false);
+      setLoading(true);
+      const response = await fetch("http://192.168.1.73:8080/api/addUser", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        console.log("Registrado com sucesso!");
+        setIsRegistered(true);
+      } else {
+        console.log("Erro: ", result.error);
+        setIsRegistered(false);
+      }
+    } catch (error) {
+      console.log("Erro na requisição");
+      setIsRegistered(false);
+    } finally {
+      setLoading(false);
+      setFinished(true);
+    }
+  };
+
+  return { users, user, loading, isRegistered, finished, setIsRegistered, setFinished, getUsers, getUser, addUser };
 }

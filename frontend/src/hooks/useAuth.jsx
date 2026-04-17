@@ -7,7 +7,7 @@ export function useAuth() {
   const [credentials, setCredentials] = useState(null);
 
   const authenticate = (email, password) => {
-    const url = `http://192.168.1.73:81/api/users/search?email=${email}`;
+    const url = `http://192.168.1.73:8080/api/users/search?email=${email}`;
     setCredentials({ email, password, url });
   };
 
