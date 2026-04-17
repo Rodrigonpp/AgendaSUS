@@ -17,7 +17,6 @@ const LoginView = () => {
   const [password, setPassword] = useState("");
   const { isAuth, authenticate } = useAuth();
   const { credentials, setCredentials, isActive } = useContext(SessionContext);
-  // const {credentials, setCredentials, isActive} = useSession()
 
   useEffect(() => {
     if (isAuth) navigate("agendar");
@@ -31,7 +30,7 @@ const LoginView = () => {
           className="login"
           onSubmit={(e) => {
             e.preventDefault();
-            // authenticate(email, password);
+            // authenticate(email, password); LEMBRAR DE CONFIGURAR O CONTEXT NO useAuth
             setCredentials({ teste: email });
           }}
         >
