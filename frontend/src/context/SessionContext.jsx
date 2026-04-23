@@ -1,16 +1,21 @@
-import { createContext, useState, useEffect } from "react";
+// HOOKS
+import { createContext, useState } from "react";
 
 export const SessionContext = createContext();
 
 export const SessionContextProvider = ({ children }) => {
-  const [credentials, setCredentials] = useState();
-  const isActive = !!credentials;
+  const [sessionData, setSessionData] = useState(null);
+  const isActive = !!sessionData;
 
-  console.log("Executou:", isActive);
-  console.log(credentials);
+  console.log(sessionData);
+  const logout = () => {
+    setSessionData(null);
+  };
 
   return (
-    <SessionContext.Provider value={{ credentials, setCredentials, isActive }}>
+    <SessionContext.Provider
+      value={{ sessionData, setSessionData, isActive, logout }}
+    >
       {children}
     </SessionContext.Provider>
   );

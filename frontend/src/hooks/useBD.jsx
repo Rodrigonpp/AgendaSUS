@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function useBD() {
   const [users, setUsers] = useState(null);
@@ -58,5 +58,16 @@ export function useBD() {
     }
   };
 
-  return { users, user, loading, isRegistered, finished, setIsRegistered, setFinished, getUsers, getUser, addUser };
+  return {
+    users,
+    user,
+    loading,
+    isRegistered,
+    finished,
+    setIsRegistered,
+    setFinished,
+    getUsers,
+    getUser,
+    addUser,
+  };
 }

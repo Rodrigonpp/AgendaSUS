@@ -86,6 +86,7 @@ def add_user():
         return jsonify({'message': 'Usuário criado com sucesso.'}), 201
     except Exception as e:
         return jsonify({'Erro:': e}), 400
-
+    
+    
 app.run(host='192.168.1.73', port=8080)
 

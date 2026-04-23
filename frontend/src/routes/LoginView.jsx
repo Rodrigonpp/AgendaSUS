@@ -1,7 +1,6 @@
 // HOOKS
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-// import { useSession } from "../hooks/useSession";
 // ASSETS
 import google_icon from "../assets/google-icon.svg";
 // STYLES
@@ -9,14 +8,16 @@ import "./LoginView.css";
 import { useNavigate } from "react-router";
 // COMPONENTS
 import Presentation from "../components/Presentation";
-import { SessionContext } from "../context/SessionContext";
 
 const LoginView = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isAuth, authenticate } = useAuth();
-  const { credentials, setCredentials, isActive } = useContext(SessionContext);
+  const { isAuth, authenticate, logout } = useAuth();
+
+  useEffect(() => {
+    logout();
+  }, []);
 
   useEffect(() => {
     if (isAuth) navigate("agendar");
@@ -30,8 +31,7 @@ const LoginView = () => {
           className="login"
           onSubmit={(e) => {
             e.preventDefault();
-            // authenticate(email, password); LEMBRAR DE CONFIGURAR O CONTEXT NO useAuth
-            setCredentials({ teste: email });
+            authenticate(email, password);
           }}
         >
           <h3>Identifique-se com:</h3>
