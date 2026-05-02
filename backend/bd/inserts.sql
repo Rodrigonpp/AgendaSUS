@@ -39,7 +39,7 @@ INSERT INTO appointments (patient_id, free_schedule_id) VALUES (1, 2);
 SELECT * FROM appointments;
 DELETE FROM appointments WHERE id = 1;
 
-/*CONSULTAS COM INNER*/
+/*CONSULTAS COM JOIN | CRIAR UM SELECTS.sql DPS*/
 /*PACIENTES*/
 SELECT 
 	users.*, patients.name AS name, patients.cpf AS cpf, patients.birth_date AS birth_date 
