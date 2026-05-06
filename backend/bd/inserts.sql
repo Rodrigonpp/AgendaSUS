@@ -269,4 +269,72 @@ INSERT INTO appointments (status, patient_id, free_schedule_id) VALUES
 ('SCHEDULED', 33, 35);
 SELECT * FROM appointments;
 
-/*FALTA: overview, history, notification*/
+-- 8. Notificações (30)
+INSERT INTO notifications (type, sent_at, delivery_status, appointment_id) VALUES 
+('EMAIL', '2026-05-01 08:00:00', 'SENT', 2),
+('SMS', '2026-05-01 08:05:00', 'SENT', 3),
+('WHATSAPP', '2026-05-01 09:00:00', 'SENT', 4),
+('EMAIL', '2026-05-01 10:30:00', 'FAILED', 5),
+('WHATSAPP', '2026-05-02 08:00:00', 'SENT', 6),
+('SMS', '2026-05-02 08:15:00', 'PENDING', 7),
+('EMAIL', '2026-05-02 09:00:00', 'SENT', 8),
+('WHATSAPP', '2026-05-02 11:00:00', 'SENT', 9),
+('SMS', '2026-05-03 14:00:00', 'SENT', 10),
+('EMAIL', '2026-05-03 15:00:00', 'SENT', 11),
+('WHATSAPP', '2026-05-03 16:30:00', 'FAILED', 12),
+('SMS', '2026-05-04 08:00:00', 'SENT', 13),
+('EMAIL', '2026-05-04 09:20:00', 'SENT', 14),
+('WHATSAPP', '2026-05-04 10:00:00', 'SENT', 15),
+('SMS', '2026-05-04 11:45:00', 'SENT', 16),
+('EMAIL', '2026-05-05 08:00:00', 'SENT', 17),
+('WHATSAPP', '2026-05-05 08:30:00', 'PENDING', 18),
+('SMS', '2026-05-05 09:15:00', 'SENT', 19),
+('EMAIL', '2026-05-05 10:00:00', 'SENT', 20),
+('WHATSAPP', '2026-05-05 13:00:00', 'SENT', 21),
+('SMS', '2026-05-05 14:00:00', 'SENT', 22),
+('EMAIL', '2026-05-05 15:30:00', 'FAILED', 23),
+('WHATSAPP', '2026-05-05 16:00:00', 'SENT', 24),
+('SMS', '2026-05-05 17:00:00', 'SENT', 25),
+('EMAIL', '2026-05-05 18:00:00', 'SENT', 26),
+('WHATSAPP', '2026-05-06 08:00:00', 'SENT', 27),
+('SMS', '2026-05-06 09:00:00', 'SENT', 28),
+('EMAIL', '2026-05-06 10:00:00', 'PENDING', 29),
+('WHATSAPP', '2026-05-06 11:00:00', 'SENT', 30),
+('SMS', '2026-05-06 12:00:00', 'SENT', 31);
+SELECT * FROM notifications;
+
+-- 9. Overview (25)
+INSERT INTO overview (diagnosis, appointment_id) VALUES 
+('Paciente apresenta quadro de fadiga crônica e deficiência de vitamina D.', 2),
+('Resultados de exames cardíacos normais. Recomendado retorno em 6 meses.', 3),
+('Crise alérgica sazonal. Prescrito anti-histamínico e repouso.', 4),
+('Lesão muscular leve no joelho esquerdo devido a esforço repetitivo.', 5),
+('Suspeita de gastrite nervosa. Encaminhado para endoscopia.', 6),
+('Acompanhamento pré-natal: desenvolvimento fetal dentro da normalidade.', 7),
+('Quadro depressivo moderado. Iniciado acompanhamento psicoterapêutico.', 8),
+('Conjuntivite bacteriana confirmada. Prescrito colírio antibiótico.', 9),
+('Enxaqueca tensional recorrente. Sugerido ajuste na rotina de sono.', 10),
+('Diabetes Tipo 2 sob controle. Mantida a dosagem atual de medicação.', 11),
+('Hipertensão arterial estágio 1. Recomendada dieta hipossódica.', 12),
+('Dermatite de contato por exposição a produtos de limpeza.', 13),
+('Infecção urinária recorrente. Iniciado ciclo de antibióticos.', 14),
+('Avaliação física para atividades esportivas: apto sem restrições.', 15),
+('Rinite alérgica aguda. Recomendado uso de purificador de ar.', 16),
+('Check-up anual: níveis de colesterol ligeiramente elevados.', 17),
+('Escoliose leve detectada. Encaminhado para sessões de RPG.', 18),
+('Anemia ferropriva detectada. Iniciada suplementação de ferro.', 19),
+('Ansiedade generalizada. Discutidas opções de tratamento natural.', 20),
+('Sintomas de gripe comum (Influenza). Recomendado isolamento e hidratação.', 21),
+('Recuperação pós-cirúrgica excelente. Retirada de pontos realizada.', 22),
+('Dores lombares crônicas. Prescrito relaxante muscular e fisioterapia.', 23),
+('Sinusite aguda. Prescrito corticóide nasal e lavagem salina.', 24),
+('Hipotiroidismo estável com o uso de Levotiroxina.', 25),
+('Exame de fundo de olho sem alterações. Mantido grau atual de miopia.', 26);
+SELECT * FROM overview;
+
+-- 10. Histórico (25)
+INSERT INTO history (overview_id) VALUES 
+(1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
+(11), (12), (13), (14), (15), (16), (17), (18), (19), (20),
+(21), (22), (23), (24), (25);
+SELECT * FROM history;
