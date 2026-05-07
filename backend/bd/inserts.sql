@@ -2,7 +2,6 @@
 INSERT INTO specialties (name) VALUES 
 ('Cardiologia'), ('Dermatologia'), ('Pediatria'), ('Ortopedia'), ('Ginecologia'), 
 ('Psiquiatria'), ('Oftalmologia'), ('Neurologia'), ('Endocrinologia'), ('Urologia');
-SELECT * FROM specialties ORDER BY id;
 
 -- 2. Clínicas (30)
 INSERT INTO clinics (name) VALUES 
@@ -12,7 +11,6 @@ INSERT INTO clinics (name) VALUES
 ('Instituto de Neurologia'), ('Clínica Dermatológica Lótus'), ('Centro de Reabilitação'), ('Hospital das Nações'), ('Clínica São José'),
 ('Consultório Reaviva'), ('Clínica MultiMed'), ('Centro de Trauma'), ('Instituto Endócrino'), ('Hospital da Criança'),
 ('Clínica Viver Mais'), ('Centro de Terapias'), ('Unidade Avançada Oeste'), ('Clínica Sanitas'), ('Hospital Geral');
-SELECT * FROM clinics ORDER BY id;
 
 -- 3. Usuários(100)
 -- Inserindo 30 Médicos
@@ -70,7 +68,6 @@ INSERT INTO users (email, password, role) VALUES
 ('paciente65@teste.com', 'paz456', 'PATIENT'), ('paciente66@teste.com', 'paz456', 'PATIENT'),
 ('paciente67@teste.com', 'paz456', 'PATIENT'), ('paciente68@teste.com', 'paz456', 'PATIENT'),
 ('paciente69@teste.com', 'paz456', 'PATIENT'), ('paciente70@teste.com', 'paz456', 'PATIENT');
-SELECT * FROM users;
 
 -- 4. Médicos (30)
 INSERT INTO doctors (name, crm, user_id, specialtie_id) VALUES 
@@ -104,7 +101,6 @@ INSERT INTO doctors (name, crm, user_id, specialtie_id) VALUES
 ('Dra. Bruna Marquez', 'CRM/SP 10028', 35, 11),
 ('Dr. Claudio Raiol', 'CRM/SP 10029', 36, 12),
 ('Dra. Debora Seco', 'CRM/SP 10030', 37, 13);
-SELECT * FROM doctors;
 
 -- 5. Pacientes (70) - Referencia users(31-100)
 INSERT INTO patients (name, cpf, birth_date, user_id) VALUES 
@@ -178,7 +174,18 @@ INSERT INTO patients (name, cpf, birth_date, user_id) VALUES
 ('Silvia Junqueira', '10000000068', '1982-07-06', 105),
 ('Breno Eustaquio', '10000000069', '1992-05-18', 106),
 ('Zilda Ferreira', '10000000070', '1988-01-01', 107);
-SELECT * FROM patients;
+
+-- inserindo número de telefone (10 primeiros)
+UPDATE patients SET phone_number = '11987654321' WHERE id = 4;
+UPDATE patients SET phone_number = '11976543210' WHERE id = 5;
+UPDATE patients SET phone_number = '21965432109' WHERE id = 6;
+UPDATE patients SET phone_number = '21954321098' WHERE id = 7;
+UPDATE patients SET phone_number = '31943210987' WHERE id = 8;
+UPDATE patients SET phone_number = '31932109876' WHERE id = 9;
+UPDATE patients SET phone_number = '41921098765' WHERE id = 10;
+UPDATE patients SET phone_number = '41910987654' WHERE id = 11;
+UPDATE patients SET phone_number = '51909876543' WHERE id = 12;
+UPDATE patients SET phone_number = '51998877665' WHERE id = 13;
 
 -- 6. Agendas Livres (50)
 INSERT INTO free_schedules (start_time, status, doctor_id, clinic_id) VALUES 
@@ -232,7 +239,6 @@ INSERT INTO free_schedules (start_time, status, doctor_id, clinic_id) VALUES
 ('2026-06-06 10:00:00', TRUE, 23, 20),
 ('2026-06-06 11:00:00', TRUE, 24, 21),
 ('2026-06-06 13:00:00', TRUE, 25, 22);
-SELECT * FROM free_schedules;
 
 -- 7. Consultas (30)
 -- Importante: free_schedule_id é UNIQUE
@@ -267,7 +273,8 @@ INSERT INTO appointments (status, patient_id, free_schedule_id) VALUES
 ('SCHEDULED', 31, 33),
 ('CONCLUDED', 32, 34),
 ('SCHEDULED', 33, 35);
-SELECT * FROM appointments;
+
+INSERT INTO appointments (status, patient_id, free_schedule_id) VALUES ('SCHEDULED', 7, 47);
 
 -- 8. Notificações (30)
 INSERT INTO notifications (type, sent_at, delivery_status, appointment_id) VALUES 
@@ -301,7 +308,6 @@ INSERT INTO notifications (type, sent_at, delivery_status, appointment_id) VALUE
 ('EMAIL', '2026-05-06 10:00:00', 'PENDING', 29),
 ('WHATSAPP', '2026-05-06 11:00:00', 'SENT', 30),
 ('SMS', '2026-05-06 12:00:00', 'SENT', 31);
-SELECT * FROM notifications;
 
 -- 9. Overview (25)
 INSERT INTO overview (diagnosis, appointment_id) VALUES 
@@ -330,11 +336,9 @@ INSERT INTO overview (diagnosis, appointment_id) VALUES
 ('Sinusite aguda. Prescrito corticóide nasal e lavagem salina.', 24),
 ('Hipotiroidismo estável com o uso de Levotiroxina.', 25),
 ('Exame de fundo de olho sem alterações. Mantido grau atual de miopia.', 26);
-SELECT * FROM overview;
 
 -- 10. Histórico (25)
 INSERT INTO history (overview_id) VALUES 
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
 (11), (12), (13), (14), (15), (16), (17), (18), (19), (20),
 (21), (22), (23), (24), (25);
-SELECT * FROM history;

@@ -15,6 +15,7 @@ const Register = () => {
   const navigate = useNavigate();
   const { addUser, loading, isRegistered, setFinished, finished } = useBD();
   const [cpf, setCpf] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [birthdate, setBirthdate] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -30,13 +31,20 @@ const Register = () => {
             onSubmit={(e) => {
               e.preventDefault();
               const credentials = {
-                cpf: cpf,
-                birthdate: birthdate,
-                username: username,
-                email: email,
-                password: password,
+                users: {
+                  email: email,
+                  password: password,
+                  role: "PATIENT",
+                },
+                patients: {
+                  name: username,
+                  cpf: cpf,
+                  birthdate: birthdate,
+                },
               };
-              addUser(credentials);
+              // addUser(credentials);
+              // CREDENTIALS CONFIGURADAS, PROX PASSO: CONFIGURAR O POST EM addUser
+              console.log(credentials);
             }}
           >
             <div className="title-container">
@@ -62,6 +70,23 @@ const Register = () => {
                 value={cpf || ""}
                 onValueChange={(value) => {
                   setCpf(value.value);
+                }}
+              />
+            </label>
+            <label htmlFor="phone-number">
+              <span>
+                Número de telefone: <span className="required">*</span>
+              </span>
+              <PatternFormat
+                format="(##)#####-####"
+                mask=""
+                placeholder="(81)99999-9999"
+                required
+                id="phone-number"
+                name="phone-number"
+                value={phoneNumber || ""}
+                onValueChange={(value) => {
+                  setPhoneNumber(value.value);
                 }}
               />
             </label>

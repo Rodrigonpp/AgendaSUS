@@ -20,7 +20,7 @@ def get_users_data():
         host='localhost',
         user='root',
         password='',
-        database='agendasus',
+        database='agendasus_v1',
         cursorclass=pymysql.cursors.DictCursor,
     )
 
@@ -39,7 +39,7 @@ def get_user():
         host='localhost',
         user='root',
         password='',
-        database='agendasus',
+        database='agendasus_v1',
         cursorclass=pymysql.cursors.DictCursor,
     )
 
@@ -68,7 +68,7 @@ def add_user():
         host='localhost',
         user='root',
         password='',
-        database='agendasus',
+        database='agendasus_v1',
         cursorclass=pymysql.cursors.DictCursor,
     )
     my_cursor = mydb.cursor()

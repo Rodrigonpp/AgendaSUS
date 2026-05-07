@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS patients (
     name VARCHAR(100) NOT NULL,
     cpf VARCHAR(11) UNIQUE NOT NULL,
     birth_date DATE NOT NULL,
+    phone_number VARCHAR(13),
     user_id INT NOT NULL UNIQUE,
     
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users(id)
@@ -106,4 +107,24 @@ BEGIN
     SET status = TRUE 
     WHERE id = OLD.free_schedule_id;
 END; // 
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER tg_overview
+AFTER INSERT ON appointments
+FOR EACH ROW
+BEGIN
+	INSERT INTO overview (appointment_id) 
+    VALUES (NEW.id);
+END; //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER tg_history
+AFTER INSERT ON overview
+FOR EACH ROW
+BEGIN
+	INSERT INTO history (overview_id) 
+    VALUES (NEW.id);
+END; //
 DELIMITER ;

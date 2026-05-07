@@ -32,7 +32,7 @@ CREATE TABLE `appointments` (
   KEY `fk_patient_appointment_id` (`patient_id`),
   CONSTRAINT `fk_patient_appointment_id` FOREIGN KEY (`patient_id`) REFERENCES `patients` (`id`),
   CONSTRAINT `fk_schedule_appointment_id` FOREIGN KEY (`free_schedule_id`) REFERENCES `free_schedules` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `appointments` (
 
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` VALUES (2,'SCHEDULED',4,6),(3,'CONCLUDED',5,7),(4,'SCHEDULED',6,8),(5,'CANCELED',7,9),(6,'CONCLUDED',8,10),(7,'SCHEDULED',9,11),(8,'SCHEDULED',10,12),(9,'CONCLUDED',11,13),(10,'SCHEDULED',12,14),(11,'CANCELED',13,15),(12,'SCHEDULED',14,16),(13,'CONCLUDED',15,17),(14,'SCHEDULED',16,18),(15,'SCHEDULED',17,19),(16,'CONCLUDED',18,20),(17,'SCHEDULED',19,21),(18,'CANCELED',20,22),(19,'SCHEDULED',21,23),(20,'CONCLUDED',22,24),(21,'SCHEDULED',23,25),(22,'SCHEDULED',24,26),(23,'CONCLUDED',25,27),(24,'SCHEDULED',26,28),(25,'CANCELED',27,29),(26,'SCHEDULED',28,30),(27,'CONCLUDED',29,31),(28,'SCHEDULED',30,32),(29,'SCHEDULED',31,33),(30,'CONCLUDED',32,34),(31,'SCHEDULED',33,35);
+INSERT INTO `appointments` VALUES (2,'SCHEDULED',4,6),(3,'CONCLUDED',5,7),(4,'SCHEDULED',6,8),(5,'CANCELED',7,9),(6,'CONCLUDED',8,10),(7,'SCHEDULED',9,11),(8,'SCHEDULED',10,12),(9,'CONCLUDED',11,13),(10,'SCHEDULED',12,14),(11,'CANCELED',13,15),(12,'SCHEDULED',14,16),(13,'CONCLUDED',15,17),(14,'SCHEDULED',16,18),(15,'SCHEDULED',17,19),(16,'CONCLUDED',18,20),(17,'SCHEDULED',19,21),(18,'CANCELED',20,22),(19,'SCHEDULED',21,23),(20,'CONCLUDED',22,24),(21,'SCHEDULED',23,25),(22,'SCHEDULED',24,26),(23,'CONCLUDED',25,27),(24,'SCHEDULED',26,28),(25,'CANCELED',27,29),(26,'SCHEDULED',28,30),(27,'CONCLUDED',29,31),(28,'SCHEDULED',30,32),(29,'SCHEDULED',31,33),(30,'CONCLUDED',32,34),(31,'SCHEDULED',33,35),(33,'SCHEDULED',7,47);
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -60,6 +60,27 @@ BEGIN
 	UPDATE free_schedules
     SET status = FALSE 
     WHERE id = NEW.free_schedule_id;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER tg_overview
+AFTER INSERT ON appointments
+FOR EACH ROW
+BEGIN
+	INSERT INTO overview (appointment_id) 
+    VALUES (NEW.id);
 END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -173,7 +194,7 @@ CREATE TABLE `free_schedules` (
 
 LOCK TABLES `free_schedules` WRITE;
 /*!40000 ALTER TABLE `free_schedules` DISABLE KEYS */;
-INSERT INTO `free_schedules` VALUES (6,'2026-06-01 08:00:00',0,6,3),(7,'2026-06-01 09:00:00',0,7,4),(8,'2026-06-01 10:00:00',0,8,5),(9,'2026-06-01 11:00:00',0,9,6),(10,'2026-06-01 13:00:00',0,10,7),(11,'2026-06-01 14:00:00',0,11,8),(12,'2026-06-01 15:00:00',0,12,9),(13,'2026-06-01 16:00:00',0,13,10),(14,'2026-06-01 17:00:00',0,14,11),(15,'2026-06-02 08:00:00',0,15,12),(16,'2026-06-02 09:00:00',0,16,13),(17,'2026-06-02 10:00:00',0,17,14),(18,'2026-06-02 11:00:00',0,18,15),(19,'2026-06-02 13:00:00',0,19,16),(20,'2026-06-02 14:00:00',0,20,17),(21,'2026-06-02 15:00:00',0,21,18),(22,'2026-06-02 16:00:00',0,22,19),(23,'2026-06-02 17:00:00',0,23,20),(24,'2026-06-03 08:00:00',0,24,21),(25,'2026-06-03 09:00:00',0,25,22),(26,'2026-06-03 10:00:00',0,26,23),(27,'2026-06-03 11:00:00',0,27,24),(28,'2026-06-03 13:00:00',0,28,25),(29,'2026-06-03 14:00:00',0,29,26),(30,'2026-06-03 15:00:00',0,30,27),(31,'2026-06-03 16:00:00',0,31,28),(32,'2026-06-03 17:00:00',0,32,29),(33,'2026-06-04 08:00:00',0,33,30),(34,'2026-06-04 09:00:00',0,34,31),(35,'2026-06-04 10:00:00',0,35,32),(36,'2026-06-04 11:00:00',1,6,3),(37,'2026-06-04 13:00:00',1,7,4),(38,'2026-06-04 14:00:00',1,8,5),(39,'2026-06-04 15:00:00',1,9,6),(40,'2026-06-04 16:00:00',1,10,7),(41,'2026-06-04 17:00:00',1,11,8),(42,'2026-06-05 08:00:00',1,12,9),(43,'2026-06-05 09:00:00',1,13,10),(44,'2026-06-05 10:00:00',1,14,11),(45,'2026-06-05 11:00:00',1,15,12),(46,'2026-06-05 13:00:00',1,16,13),(47,'2026-06-05 14:00:00',1,17,14),(48,'2026-06-05 15:00:00',1,18,15),(49,'2026-06-05 16:00:00',1,19,16),(50,'2026-06-05 17:00:00',1,20,17),(51,'2026-06-06 08:00:00',1,21,18),(52,'2026-06-06 09:00:00',1,22,19),(53,'2026-06-06 10:00:00',1,23,20),(54,'2026-06-06 11:00:00',1,24,21),(55,'2026-06-06 13:00:00',1,25,22);
+INSERT INTO `free_schedules` VALUES (6,'2026-06-01 08:00:00',0,6,3),(7,'2026-06-01 09:00:00',0,7,4),(8,'2026-06-01 10:00:00',0,8,5),(9,'2026-06-01 11:00:00',0,9,6),(10,'2026-06-01 13:00:00',0,10,7),(11,'2026-06-01 14:00:00',0,11,8),(12,'2026-06-01 15:00:00',0,12,9),(13,'2026-06-01 16:00:00',0,13,10),(14,'2026-06-01 17:00:00',0,14,11),(15,'2026-06-02 08:00:00',0,15,12),(16,'2026-06-02 09:00:00',0,16,13),(17,'2026-06-02 10:00:00',0,17,14),(18,'2026-06-02 11:00:00',0,18,15),(19,'2026-06-02 13:00:00',0,19,16),(20,'2026-06-02 14:00:00',0,20,17),(21,'2026-06-02 15:00:00',0,21,18),(22,'2026-06-02 16:00:00',0,22,19),(23,'2026-06-02 17:00:00',0,23,20),(24,'2026-06-03 08:00:00',0,24,21),(25,'2026-06-03 09:00:00',0,25,22),(26,'2026-06-03 10:00:00',0,26,23),(27,'2026-06-03 11:00:00',0,27,24),(28,'2026-06-03 13:00:00',0,28,25),(29,'2026-06-03 14:00:00',0,29,26),(30,'2026-06-03 15:00:00',0,30,27),(31,'2026-06-03 16:00:00',0,31,28),(32,'2026-06-03 17:00:00',0,32,29),(33,'2026-06-04 08:00:00',0,33,30),(34,'2026-06-04 09:00:00',0,34,31),(35,'2026-06-04 10:00:00',0,35,32),(36,'2026-06-04 11:00:00',1,6,3),(37,'2026-06-04 13:00:00',1,7,4),(38,'2026-06-04 14:00:00',1,8,5),(39,'2026-06-04 15:00:00',1,9,6),(40,'2026-06-04 16:00:00',1,10,7),(41,'2026-06-04 17:00:00',1,11,8),(42,'2026-06-05 08:00:00',1,12,9),(43,'2026-06-05 09:00:00',1,13,10),(44,'2026-06-05 10:00:00',1,14,11),(45,'2026-06-05 11:00:00',1,15,12),(46,'2026-06-05 13:00:00',1,16,13),(47,'2026-06-05 14:00:00',0,17,14),(48,'2026-06-05 15:00:00',1,18,15),(49,'2026-06-05 16:00:00',1,19,16),(50,'2026-06-05 17:00:00',1,20,17),(51,'2026-06-06 08:00:00',1,21,18),(52,'2026-06-06 09:00:00',1,22,19),(53,'2026-06-06 10:00:00',1,23,20),(54,'2026-06-06 11:00:00',1,24,21),(55,'2026-06-06 13:00:00',1,25,22);
 /*!40000 ALTER TABLE `free_schedules` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +211,7 @@ CREATE TABLE `history` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `overview_id` (`overview_id`),
   CONSTRAINT `fk_overview_history_id` FOREIGN KEY (`overview_id`) REFERENCES `overview` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +220,7 @@ CREATE TABLE `history` (
 
 LOCK TABLES `history` WRITE;
 /*!40000 ALTER TABLE `history` DISABLE KEYS */;
-INSERT INTO `history` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20),(21,21),(22,22),(23,23),(24,24),(25,25);
+INSERT INTO `history` VALUES (1,1),(2,2),(3,3),(4,4),(5,5),(6,6),(7,7),(8,8),(9,9),(10,10),(11,11),(12,12),(13,13),(14,14),(15,15),(16,16),(17,17),(18,18),(19,19),(20,20),(21,21),(22,22),(23,23),(24,24),(25,25),(26,26);
 /*!40000 ALTER TABLE `history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +267,7 @@ CREATE TABLE `overview` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `appointment_id` (`appointment_id`),
   CONSTRAINT `fk_appointment_overview_id` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,9 +276,30 @@ CREATE TABLE `overview` (
 
 LOCK TABLES `overview` WRITE;
 /*!40000 ALTER TABLE `overview` DISABLE KEYS */;
-INSERT INTO `overview` VALUES (1,'Paciente apresenta quadro de fadiga crônica e deficiência de vitamina D.',2),(2,'Resultados de exames cardíacos normais. Recomendado retorno em 6 meses.',3),(3,'Crise alérgica sazonal. Prescrito anti-histamínico e repouso.',4),(4,'Lesão muscular leve no joelho esquerdo devido a esforço repetitivo.',5),(5,'Suspeita de gastrite nervosa. Encaminhado para endoscopia.',6),(6,'Acompanhamento pré-natal: desenvolvimento fetal dentro da normalidade.',7),(7,'Quadro depressivo moderado. Iniciado acompanhamento psicoterapêutico.',8),(8,'Conjuntivite bacteriana confirmada. Prescrito colírio antibiótico.',9),(9,'Enxaqueca tensional recorrente. Sugerido ajuste na rotina de sono.',10),(10,'Diabetes Tipo 2 sob controle. Mantida a dosagem atual de medicação.',11),(11,'Hipertensão arterial estágio 1. Recomendada dieta hipossódica.',12),(12,'Dermatite de contato por exposição a produtos de limpeza.',13),(13,'Infecção urinária recorrente. Iniciado ciclo de antibióticos.',14),(14,'Avaliação física para atividades esportivas: apto sem restrições.',15),(15,'Rinite alérgica aguda. Recomendado uso de purificador de ar.',16),(16,'Check-up anual: níveis de colesterol ligeiramente elevados.',17),(17,'Escoliose leve detectada. Encaminhado para sessões de RPG.',18),(18,'Anemia ferropriva detectada. Iniciada suplementação de ferro.',19),(19,'Ansiedade generalizada. Discutidas opções de tratamento natural.',20),(20,'Sintomas de gripe comum (Influenza). Recomendado isolamento e hidratação.',21),(21,'Recuperação pós-cirúrgica excelente. Retirada de pontos realizada.',22),(22,'Dores lombares crônicas. Prescrito relaxante muscular e fisioterapia.',23),(23,'Sinusite aguda. Prescrito corticóide nasal e lavagem salina.',24),(24,'Hipotiroidismo estável com o uso de Levotiroxina.',25),(25,'Exame de fundo de olho sem alterações. Mantido grau atual de miopia.',26);
+INSERT INTO `overview` VALUES (1,'Paciente apresenta quadro de fadiga crônica e deficiência de vitamina D.',2),(2,'Resultados de exames cardíacos normais. Recomendado retorno em 6 meses.',3),(3,'Crise alérgica sazonal. Prescrito anti-histamínico e repouso.',4),(4,'Lesão muscular leve no joelho esquerdo devido a esforço repetitivo.',5),(5,'Suspeita de gastrite nervosa. Encaminhado para endoscopia.',6),(6,'Acompanhamento pré-natal: desenvolvimento fetal dentro da normalidade.',7),(7,'Quadro depressivo moderado. Iniciado acompanhamento psicoterapêutico.',8),(8,'Conjuntivite bacteriana confirmada. Prescrito colírio antibiótico.',9),(9,'Enxaqueca tensional recorrente. Sugerido ajuste na rotina de sono.',10),(10,'Diabetes Tipo 2 sob controle. Mantida a dosagem atual de medicação.',11),(11,'Hipertensão arterial estágio 1. Recomendada dieta hipossódica.',12),(12,'Dermatite de contato por exposição a produtos de limpeza.',13),(13,'Infecção urinária recorrente. Iniciado ciclo de antibióticos.',14),(14,'Avaliação física para atividades esportivas: apto sem restrições.',15),(15,'Rinite alérgica aguda. Recomendado uso de purificador de ar.',16),(16,'Check-up anual: níveis de colesterol ligeiramente elevados.',17),(17,'Escoliose leve detectada. Encaminhado para sessões de RPG.',18),(18,'Anemia ferropriva detectada. Iniciada suplementação de ferro.',19),(19,'Ansiedade generalizada. Discutidas opções de tratamento natural.',20),(20,'Sintomas de gripe comum (Influenza). Recomendado isolamento e hidratação.',21),(21,'Recuperação pós-cirúrgica excelente. Retirada de pontos realizada.',22),(22,'Dores lombares crônicas. Prescrito relaxante muscular e fisioterapia.',23),(23,'Sinusite aguda. Prescrito corticóide nasal e lavagem salina.',24),(24,'Hipotiroidismo estável com o uso de Levotiroxina.',25),(25,'Exame de fundo de olho sem alterações. Mantido grau atual de miopia.',26),(26,NULL,33);
 /*!40000 ALTER TABLE `overview` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER tg_history
+AFTER INSERT ON overview
+FOR EACH ROW
+BEGIN
+	INSERT INTO history (overview_id) 
+    VALUES (NEW.id);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `patients`
@@ -272,6 +314,7 @@ CREATE TABLE `patients` (
   `cpf` varchar(11) NOT NULL,
   `birth_date` date NOT NULL,
   `user_id` int(11) NOT NULL,
+  `phone_number` varchar(13) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `cpf` (`cpf`),
   UNIQUE KEY `user_id` (`user_id`),
@@ -285,7 +328,7 @@ CREATE TABLE `patients` (
 
 LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
-INSERT INTO `patients` VALUES (4,'João Silva','10000000001','1990-01-10',38),(5,'Maria Oliveira','10000000002','1985-05-22',39),(6,'Carlos Souza','10000000003','1978-11-30',40),(7,'Ana Costa','10000000004','1992-03-15',41),(8,'Lucas Santos','10000000005','2000-07-08',42),(9,'Bruna Lima','10000000006','1988-12-12',43),(10,'Ricardo Alves','10000000007','1995-02-25',44),(11,'Julia Ribeiro','10000000008','1982-09-14',45),(12,'Marcos Rocha','10000000009','1975-06-20',46),(13,'Fernanda Gomes','10000000010','1991-08-05',47),(14,'Paulo Vieira','10000000011','1980-04-18',48),(15,'Camila Martins','10000000012','1993-10-27',49),(16,'Gabriel Barbosa','10000000013','1987-01-02',50),(17,'Larissa Freitas','10000000014','1998-11-11',51),(18,'Rafael Carvalho','10000000015','1984-03-09',52),(19,'Amanda Silva','10000000016','1979-05-30',53),(20,'Igor Pereira','10000000017','1996-07-21',54),(21,'Leticia Castro','10000000018','1989-02-14',55),(22,'Gustavo Nunes','10000000019','1994-09-03',56),(23,'Beatriz Lopes','10000000020','1981-12-25',57),(24,'André Cardoso','10000000021','1977-06-15',58),(25,'Tatiana Neves','10000000022','1990-11-20',59),(26,'Fabio Azevedo','10000000023','1983-04-10',60),(27,'Priscila Ramos','10000000024','1992-01-05',61),(28,'Thiago Barros','10000000025','1986-08-17',62),(29,'Vanessa Teixeira','10000000026','1997-03-29',63),(30,'Leonardo Mendes','10000000027','1988-10-12',64),(31,'Daniela Borges','10000000028','1976-02-28',65),(32,'Sandro Correa','10000000029','1982-05-14',66),(33,'Monica Farias','10000000030','1995-12-01',67),(34,'Renato Guimarães','10000000031','1984-07-19',68),(35,'Elaine Machado','10000000032','1991-09-30',69),(36,'Vitor Moreira','10000000033','1979-01-22',70),(37,'Simone Duarte','10000000034','1987-11-08',71),(38,'Marcelo Pires','10000000035','1993-06-04',72),(39,'Cristiane Fonseca','10000000036','1980-03-12',73),(40,'Eduardo Aguiar','10000000037','1996-10-15',74),(41,'Flavia Campos','10000000038','1985-02-27',75),(42,'Alexandre Viana','10000000039','1978-08-09',76),(43,'Patrícia Leal','10000000040','1994-04-21',77),(44,'Hugo Antunes','10000000041','1989-12-05',78),(45,'Milena Matos','10000000042','1998-07-11',79),(46,'Rogério Prado','10000000043','1981-09-18',80),(47,'Cíntia Moraes','10000000044','1983-01-30',81),(48,'Douglas Batista','10000000045','1990-05-14',82),(49,'Sabrina Caldas','10000000046','1977-10-25',83),(50,'Murilo Peixoto','10000000047','1992-06-08',84),(51,'Kelly Assis','10000000048','1986-03-22',85),(52,'Caio Figueiredo','10000000049','1999-11-19',86),(53,'Roseane Monteiro','10000000050','1984-08-31',87),(54,'Jonas Gaspar','10000000051','1975-02-14',88),(55,'Gisele Arantes','10000000052','1991-04-03',89),(56,'Samuel Galvão','10000000053','1982-12-07',90),(57,'Erica Tavarez','10000000054','1995-09-16',91),(58,'Roberto Lacerda','10000000055','1980-01-25',92),(59,'Talita Bezerra','10000000056','1993-07-14',93),(60,'Otávio Brandão','10000000057','1987-05-19',94),(61,'Debora Santana','10000000058','1979-11-02',95),(62,'Wesley Malta','10000000059','1996-03-08',96),(63,'Regina Paiva','10000000060','1988-06-24',97),(64,'Helder Quintas','10000000061','1983-10-10',98),(65,'Viviane Dornelas','10000000062','1994-08-28',99),(66,'Artur Braganca','10000000063','1981-04-01',100),(67,'Lorena Vasconcelos','10000000064','1997-12-15',101),(68,'Cristiano Nobre','10000000065','1985-09-09',102),(69,'Sonia Abrantes','10000000066','1976-11-20',103),(70,'Valter Maia','10000000067','1990-02-22',104),(71,'Silvia Junqueira','10000000068','1982-07-06',105),(72,'Breno Eustaquio','10000000069','1992-05-18',106),(73,'Zilda Ferreira','10000000070','1988-01-01',107);
+INSERT INTO `patients` VALUES (4,'João Silva','10000000001','1990-01-10',38,'11987654321'),(5,'Maria Oliveira','10000000002','1985-05-22',39,'11976543210'),(6,'Carlos Souza','10000000003','1978-11-30',40,'21965432109'),(7,'Ana Costa','10000000004','1992-03-15',41,'21954321098'),(8,'Lucas Santos','10000000005','2000-07-08',42,'31943210987'),(9,'Bruna Lima','10000000006','1988-12-12',43,'31932109876'),(10,'Ricardo Alves','10000000007','1995-02-25',44,'41921098765'),(11,'Julia Ribeiro','10000000008','1982-09-14',45,'41910987654'),(12,'Marcos Rocha','10000000009','1975-06-20',46,'51909876543'),(13,'Fernanda Gomes','10000000010','1991-08-05',47,'51998877665'),(14,'Paulo Vieira','10000000011','1980-04-18',48,NULL),(15,'Camila Martins','10000000012','1993-10-27',49,NULL),(16,'Gabriel Barbosa','10000000013','1987-01-02',50,NULL),(17,'Larissa Freitas','10000000014','1998-11-11',51,NULL),(18,'Rafael Carvalho','10000000015','1984-03-09',52,NULL),(19,'Amanda Silva','10000000016','1979-05-30',53,NULL),(20,'Igor Pereira','10000000017','1996-07-21',54,NULL),(21,'Leticia Castro','10000000018','1989-02-14',55,NULL),(22,'Gustavo Nunes','10000000019','1994-09-03',56,NULL),(23,'Beatriz Lopes','10000000020','1981-12-25',57,NULL),(24,'André Cardoso','10000000021','1977-06-15',58,NULL),(25,'Tatiana Neves','10000000022','1990-11-20',59,NULL),(26,'Fabio Azevedo','10000000023','1983-04-10',60,NULL),(27,'Priscila Ramos','10000000024','1992-01-05',61,NULL),(28,'Thiago Barros','10000000025','1986-08-17',62,NULL),(29,'Vanessa Teixeira','10000000026','1997-03-29',63,NULL),(30,'Leonardo Mendes','10000000027','1988-10-12',64,NULL),(31,'Daniela Borges','10000000028','1976-02-28',65,NULL),(32,'Sandro Correa','10000000029','1982-05-14',66,NULL),(33,'Monica Farias','10000000030','1995-12-01',67,NULL),(34,'Renato Guimarães','10000000031','1984-07-19',68,NULL),(35,'Elaine Machado','10000000032','1991-09-30',69,NULL),(36,'Vitor Moreira','10000000033','1979-01-22',70,NULL),(37,'Simone Duarte','10000000034','1987-11-08',71,NULL),(38,'Marcelo Pires','10000000035','1993-06-04',72,NULL),(39,'Cristiane Fonseca','10000000036','1980-03-12',73,NULL),(40,'Eduardo Aguiar','10000000037','1996-10-15',74,NULL),(41,'Flavia Campos','10000000038','1985-02-27',75,NULL),(42,'Alexandre Viana','10000000039','1978-08-09',76,NULL),(43,'Patrícia Leal','10000000040','1994-04-21',77,NULL),(44,'Hugo Antunes','10000000041','1989-12-05',78,NULL),(45,'Milena Matos','10000000042','1998-07-11',79,NULL),(46,'Rogério Prado','10000000043','1981-09-18',80,NULL),(47,'Cíntia Moraes','10000000044','1983-01-30',81,NULL),(48,'Douglas Batista','10000000045','1990-05-14',82,NULL),(49,'Sabrina Caldas','10000000046','1977-10-25',83,NULL),(50,'Murilo Peixoto','10000000047','1992-06-08',84,NULL),(51,'Kelly Assis','10000000048','1986-03-22',85,NULL),(52,'Caio Figueiredo','10000000049','1999-11-19',86,NULL),(53,'Roseane Monteiro','10000000050','1984-08-31',87,NULL),(54,'Jonas Gaspar','10000000051','1975-02-14',88,NULL),(55,'Gisele Arantes','10000000052','1991-04-03',89,NULL),(56,'Samuel Galvão','10000000053','1982-12-07',90,NULL),(57,'Erica Tavarez','10000000054','1995-09-16',91,NULL),(58,'Roberto Lacerda','10000000055','1980-01-25',92,NULL),(59,'Talita Bezerra','10000000056','1993-07-14',93,NULL),(60,'Otávio Brandão','10000000057','1987-05-19',94,NULL),(61,'Debora Santana','10000000058','1979-11-02',95,NULL),(62,'Wesley Malta','10000000059','1996-03-08',96,NULL),(63,'Regina Paiva','10000000060','1988-06-24',97,NULL),(64,'Helder Quintas','10000000061','1983-10-10',98,NULL),(65,'Viviane Dornelas','10000000062','1994-08-28',99,NULL),(66,'Artur Braganca','10000000063','1981-04-01',100,NULL),(67,'Lorena Vasconcelos','10000000064','1997-12-15',101,NULL),(68,'Cristiano Nobre','10000000065','1985-09-09',102,NULL),(69,'Sonia Abrantes','10000000066','1976-11-20',103,NULL),(70,'Valter Maia','10000000067','1990-02-22',104,NULL),(71,'Silvia Junqueira','10000000068','1982-07-06',105,NULL),(72,'Breno Eustaquio','10000000069','1992-05-18',106,NULL),(73,'Zilda Ferreira','10000000070','1988-01-01',107,NULL);
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,6 +402,25 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary table structure for view `view_appointments`
+--
+
+DROP TABLE IF EXISTS `view_appointments`;
+/*!50001 DROP VIEW IF EXISTS `view_appointments`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `view_appointments` AS SELECT
+ 1 AS `id`,
+  1 AS `status`,
+  1 AS `patient_id`,
+  1 AS `patient_name`,
+  1 AS `start_time`,
+  1 AS `doctor`,
+  1 AS `specialtie`,
+  1 AS `location` */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary table structure for view `view_doctors`
 --
 
@@ -392,6 +454,29 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary table structure for view `view_notifications`
+--
+
+DROP TABLE IF EXISTS `view_notifications`;
+/*!50001 DROP VIEW IF EXISTS `view_notifications`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `view_notifications` AS SELECT
+ 1 AS `notification_id`,
+  1 AS `type`,
+  1 AS `sent_at`,
+  1 AS `delivery_status`,
+  1 AS `id`,
+  1 AS `status`,
+  1 AS `patient_id`,
+  1 AS `patient_name`,
+  1 AS `start_time`,
+  1 AS `doctor`,
+  1 AS `specialtie`,
+  1 AS `location` */;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary table structure for view `view_patients`
 --
 
@@ -406,7 +491,8 @@ SET character_set_client = utf8;
   1 AS `name`,
   1 AS `cpf`,
   1 AS `birth_date`,
-  1 AS `user_id` */;
+  1 AS `user_id`,
+  1 AS `phone_number` */;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -423,6 +509,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `view_all_schedules` AS select `free_schedules`.`id` AS `id`,`free_schedules`.`start_time` AS `start_time`,`free_schedules`.`status` AS `status`,`doctors`.`name` AS `doctor`,`specialties`.`name` AS `specialtie`,`clinics`.`name` AS `clinic` from (((`free_schedules` join `doctors` on(`free_schedules`.`doctor_id` = `doctors`.`id`)) join `specialties` on(`doctors`.`specialtie_id` = `specialties`.`id`)) join `clinics` on(`free_schedules`.`clinic_id` = `clinics`.`id`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `view_appointments`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_appointments`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_appointments` AS select `appointments`.`id` AS `id`,`appointments`.`status` AS `status`,`patients`.`id` AS `patient_id`,`patients`.`name` AS `patient_name`,`free_schedules`.`start_time` AS `start_time`,`doctors`.`name` AS `doctor`,`specialties`.`name` AS `specialtie`,`clinics`.`name` AS `location` from (((((`appointments` join `patients` on(`appointments`.`patient_id` = `patients`.`id`)) join `free_schedules` on(`appointments`.`free_schedule_id` = `free_schedules`.`id`)) join `doctors` on(`free_schedules`.`doctor_id` = `doctors`.`id`)) join `clinics` on(`free_schedules`.`clinic_id` = `clinics`.`id`)) join `specialties` on(`doctors`.`specialtie_id` = `specialties`.`id`)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -464,6 +568,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `view_notifications`
+--
+
+/*!50001 DROP VIEW IF EXISTS `view_notifications`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `view_notifications` AS select `notifications`.`id` AS `notification_id`,`notifications`.`type` AS `type`,`notifications`.`sent_at` AS `sent_at`,`notifications`.`delivery_status` AS `delivery_status`,`view_appointments`.`id` AS `id`,`view_appointments`.`status` AS `status`,`view_appointments`.`patient_id` AS `patient_id`,`view_appointments`.`patient_name` AS `patient_name`,`view_appointments`.`start_time` AS `start_time`,`view_appointments`.`doctor` AS `doctor`,`view_appointments`.`specialtie` AS `specialtie`,`view_appointments`.`location` AS `location` from (`notifications` join `view_appointments` on(`notifications`.`appointment_id` = `view_appointments`.`id`)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `view_patients`
 --
 
@@ -476,7 +598,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `view_patients` AS select `users`.`email` AS `email`,`users`.`password` AS `password`,`patients`.`id` AS `id`,`patients`.`name` AS `name`,`patients`.`cpf` AS `cpf`,`patients`.`birth_date` AS `birth_date`,`patients`.`user_id` AS `user_id` from (`patients` join `users` on(`users`.`id` = `patients`.`user_id`)) */;
+/*!50001 VIEW `view_patients` AS select `users`.`email` AS `email`,`users`.`password` AS `password`,`patients`.`id` AS `id`,`patients`.`name` AS `name`,`patients`.`cpf` AS `cpf`,`patients`.`birth_date` AS `birth_date`,`patients`.`user_id` AS `user_id`,`patients`.`phone_number` AS `phone_number` from (`patients` join `users` on(`users`.`id` = `patients`.`user_id`)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -490,4 +612,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-05 23:32:09
+-- Dump completed on 2026-05-06 20:40:08
