@@ -40,10 +40,10 @@ const Register = () => {
                   name: username,
                   cpf: cpf,
                   birthdate: birthdate,
+                  phoneNumber: phoneNumber,
                 },
               };
-              // addUser(credentials);
-              // CREDENTIALS CONFIGURADAS, PROX PASSO: CONFIGURAR O POST EM addUser
+              addUser(credentials);
               console.log(credentials);
             }}
           >

@@ -58,11 +58,18 @@ def get_user():
 def add_user():
     data = request.json
     
-    email = data.get('email')
-    user_name = data.get('username')
-    cpf = data.get('cpf')
-    password = data.get('password')
-    birthdate = data.get('birthdate')
+    users = data.get('users')
+
+    email = users.get('email')
+    password = users.get('password')
+    role = users.get('role')
+
+    patients = data.get('patients')
+
+    name = patients.get('name')
+    cpf = patients.get('cpf')
+    birthdate = patients.get('birthdate')
+    phoneNumber = patients.get('phoneNumber')
 
     mydb = pymysql.connect(
         host='localhost',
@@ -73,19 +80,24 @@ def add_user():
     )
     my_cursor = mydb.cursor()
 
-    sql = 'INSERT INTO users (email, user_name, cpf, password, birthdate) VALUES (%s, %s, %s, %s, %s)'
-    values = (email, user_name, cpf, password, birthdate)
-
     try:
-        my_cursor.execute(sql, values)
+        my_cursor.execute('INSERT INTO users (email, password, role) VALUES (%s, %s, %s)', (email, password, role,))
+        last_id = my_cursor.lastrowid
+        print(last_id)
+        my_cursor.execute('INSERT INTO patients (name, cpf, birth_date, phone_number, user_id) VALUES (%s, %s, %s, %s, %s)', (name, cpf, birthdate, phoneNumber, last_id))
+
         mydb.commit()
 
+        return jsonify({'message:': 'Usuário criado com sucesso.'}), 201
+    
+    except Exception as e:
+        print('erro')
+        mydb.rollback()
+        return jsonify({'Erro:': e}), 400
+
+    finally:
         my_cursor.close()
         mydb.close()
-
-        return jsonify({'message': 'Usuário criado com sucesso.'}), 201
-    except Exception as e:
-        return jsonify({'Erro:': e}), 400
     
     
 app.run(host='192.168.1.73', port=8080)
