@@ -40,7 +40,6 @@ export function useAuth() {
     authenticate,
     logout,
     sessionData,
-    setSessionData,
     isActive,
   };
 }
