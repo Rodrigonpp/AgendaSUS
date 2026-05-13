@@ -101,6 +101,7 @@ def add_user():
 
 @app.route('/api/free_schedules', methods=['GET'])
 def get_free_schedules():
+    #falta adicionar filtro
     my_db = pymysql.connect(
         host='localhost',
         user='root',

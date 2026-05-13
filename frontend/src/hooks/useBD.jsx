@@ -3,6 +3,8 @@ import { useState } from "react";
 export function useBD() {
   const [users, setUsers] = useState(null);
   const [user, setUser] = useState(null);
+  const [freeSchedules, setFreeSchedules] = useState();
+
   const [loading, setLoading] = useState(false);
   const [finished, setFinished] = useState(false);
   const [isRegistered, setIsRegistered] = useState();
@@ -14,7 +16,6 @@ export function useBD() {
       setUsers(data);
     } catch (error) {
       console.log("Erro: ", error);
-    } finally {
     }
   };
 
@@ -58,16 +59,30 @@ export function useBD() {
     }
   };
 
+  const getFreeSchedules = async (filter) => {
+    try {
+      const response = await fetch(
+        "http://192.168.1.73:8080/api/free_schedules",
+      );
+      const data = await response.json();
+      setFreeSchedules(data);
+    } catch (error) {
+      console.log("Erro: ", error);
+    }
+  };
+
   return {
     users,
     user,
     loading,
     isRegistered,
     finished,
+    freeSchedules,
     setIsRegistered,
     setFinished,
     getUsers,
     getUser,
     addUser,
+    getFreeSchedules,
   };
 }

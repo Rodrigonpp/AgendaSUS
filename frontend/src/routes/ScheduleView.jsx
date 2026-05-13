@@ -8,6 +8,7 @@ import { SessionContext } from "../context/SessionContext";
 const ScheduleView = () => {
   const navigate = useNavigate();
   const { sessionData } = useContext(SessionContext);
+  const { getFreeSchedules, freeSchedules } = useBD();
 
   console.log(sessionData);
 
@@ -16,11 +17,12 @@ const ScheduleView = () => {
       <h1>Bem vindo, {sessionData.name}</h1>
       <button
         onClick={() => {
-          navigate("/");
+          getFreeSchedules();
         }}
       >
-        Logout
+        Buscar
       </button>
+      {console.log(freeSchedules)}
     </div>
   );
 };

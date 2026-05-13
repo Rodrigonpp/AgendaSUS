@@ -31,7 +31,7 @@ const LoginView = () => {
           className="login"
           onSubmit={(e) => {
             e.preventDefault();
-            authenticate(email, password);
+            authenticate(email.trim(), password.trim());
           }}
         >
           <h3>Identifique-se com:</h3>

@@ -32,12 +32,12 @@ const Register = () => {
               e.preventDefault();
               const credentials = {
                 users: {
-                  email: email,
-                  password: password,
+                  email: email.trim(),
+                  password: password.trim(),
                   role: "PATIENT",
                 },
                 patients: {
-                  name: username,
+                  name: username.trim(),
                   cpf: cpf,
                   birthdate: birthdate,
                   phoneNumber: phoneNumber,
