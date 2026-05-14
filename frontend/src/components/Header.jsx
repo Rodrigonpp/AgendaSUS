@@ -40,7 +40,7 @@ const Header = () => {
               Olá, {sessionData.name}
             </span>
           </div>
-          <div className="right-container">
+          <div className="links-container">
             <span className="header-links">Nossas unidades</span>
             <span className="header-links">Seus agendamentos</span>
             <img
