@@ -1,3 +1,5 @@
+USE agendasus_v1;
+
 /*CONSULTAS COM JOIN*/
 /*DRAFT*/
 SELECT * FROM specialties ORDER BY id;

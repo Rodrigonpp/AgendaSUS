@@ -69,6 +69,18 @@ INSERT INTO users (email, password, role) VALUES
 ('paciente67@teste.com', 'paz456', 'PATIENT'), ('paciente68@teste.com', 'paz456', 'PATIENT'),
 ('paciente69@teste.com', 'paz456', 'PATIENT'), ('paciente70@teste.com', 'paz456', 'PATIENT');
 
+INSERT INTO users (id, email, password, role) VALUES 
+(118, 'lucas.silva@teste.com', 'senha123', 'PATIENT'),
+(119, 'mariana.santos@teste.com', 'senha123', 'PATIENT'),
+(120, 'pedro.oliveira@teste.com', 'senha123', 'PATIENT'),
+(121, 'ana.souza@teste.com', 'senha123', 'PATIENT'),
+(122, 'carlos.pereira@teste.com', 'senha123', 'PATIENT'),
+(123, 'julia.almeida@teste.com', 'senha123', 'PATIENT'),
+(124, 'marcos.costa@teste.com', 'senha123', 'PATIENT'),
+(125, 'beatriz.rodrigues@teste.com', 'senha123', 'PATIENT'),
+(126, 'thiago.martins@teste.com', 'senha123', 'PATIENT'),
+(127, 'fernanda.lima@teste.com', 'senha123', 'PATIENT');
+
 -- 4. Médicos (30)
 INSERT INTO doctors (name, crm, user_id, specialtie_id) VALUES 
 ('Dr. Arthur Silva', 'CRM/SP 10001', 8, 4),
@@ -174,6 +186,18 @@ INSERT INTO patients (name, cpf, birth_date, user_id) VALUES
 ('Silvia Junqueira', '10000000068', '1982-07-06', 105),
 ('Breno Eustaquio', '10000000069', '1992-05-18', 106),
 ('Zilda Ferreira', '10000000070', '1988-01-01', 107);
+
+INSERT INTO patients (name, cpf, birth_date, user_id) VALUES 
+('Lucas Silva', '45829104822', '1990-01-10', 118),
+('Mariana Santos', '81294038177', '1995-05-15', 119),
+('Pedro Oliveira', '30491827364', '1988-11-20', 120),
+('Ana Souza', '19283746509', '2000-02-02', 121),
+('Carlos Pereira', '65748392011', '1975-07-30', 122),
+('Julia Almeida', '54321678900', '1993-09-12', 123),
+('Marcos Costa', '98765432199', '1982-04-25', 124),
+('Beatriz Rodrigues', '12345678911', '1997-12-05', 125),
+('Thiago Martins', '87654321022', '1989-06-18', 126),
+('Fernanda Lima', '23456789033', '1991-08-22', 127);
 
 -- inserindo número de telefone (10 primeiros)
 UPDATE patients SET phone_number = '11987654321' WHERE id = 4;
