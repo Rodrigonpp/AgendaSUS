@@ -36,7 +36,7 @@ const Register = () => {
                   password: password.trim(),
                   role: "PATIENT",
                 },
-                patients: {
+                patient: {
                   name: username.trim(),
                   cpf: cpf,
                   birthdate: birthdate,
