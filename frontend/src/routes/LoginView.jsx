@@ -1,27 +1,26 @@
 // HOOKS
 import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router";
 // ASSETS
 import google_icon from "../assets/google-icon.svg";
 // STYLES
 import "./LoginView.css";
-import { useNavigate } from "react-router";
 // COMPONENTS
 import Presentation from "../components/Presentation";
 
 const LoginView = () => {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { isAuth, authenticate, logout } = useAuth();
 
   useEffect(() => {
     logout();
+    setEmail("");
+    setPassword("");
   }, []);
-
-  useEffect(() => {
-    if (isAuth) navigate("agendar");
-  }, [isAuth]);
 
   return (
     <div className="login-view">

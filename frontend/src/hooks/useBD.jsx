@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { IpContext } from "../context/IpContext";
 
 export function useBD() {
   const [users, setUsers] = useState(null);
   const [user, setUser] = useState(null);
   const [freeSchedules, setFreeSchedules] = useState();
+  const [clinics, setClinics] = useState({});
+  const [specialties, setSpecialties] = useState({});
 
   const [loading, setLoading] = useState(false);
+  const [clinicLoaded, setClinicLoaded] = useState(false);
+  const [specialtieLoaded, setSpecialtieLoaded] = useState(false);
   const [finished, setFinished] = useState(false);
   const [isRegistered, setIsRegistered] = useState();
 
+  const { ip } = useContext(IpContext);
+
   const getUsers = async () => {
     try {
-      const response = await fetch("http://192.168.1.73:8080/api/users");
+      const response = await fetch(`http://${ip}:8080/api/users`);
       const data = await response.json();
       setUsers(data);
     } catch (error) {
@@ -33,7 +41,7 @@ export function useBD() {
     try {
       setFinished(false);
       setLoading(true);
-      const response = await fetch("http://192.168.1.73:8080/api/addUser", {
+      const response = await fetch(`http://${ip}:8080/api/addUser`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -59,15 +67,31 @@ export function useBD() {
     }
   };
 
-  const getFreeSchedules = async (filter) => {
+  const getClinics = async () => {
     try {
-      const response = await fetch(
-        "http://192.168.1.73:8080/api/free_schedules",
-      );
+      setClinicLoaded(false);
+      const response = await fetch(`http://${ip}:8080/api/clinics`);
       const data = await response.json();
-      setFreeSchedules(data);
+      setClinics(data);
+      console.log(data);
     } catch (error) {
       console.log("Erro: ", error);
+    } finally {
+      setClinicLoaded(true);
+    }
+  };
+
+  const getSpecialties = async () => {
+    try {
+      setSpecialtieLoaded(false);
+      const response = await fetch(`http://${ip}:8080/api/specialties`);
+      const data = await response.json();
+      setSpecialties(data);
+      console.log(data);
+    } catch (error) {
+      console.log("Error: ", error);
+    } finally {
+      setSpecialtieLoaded(true);
     }
   };
 
@@ -78,11 +102,16 @@ export function useBD() {
     isRegistered,
     finished,
     freeSchedules,
+    clinics,
+    specialties,
+    clinicLoaded,
+    specialtieLoaded,
     setIsRegistered,
     setFinished,
     getUsers,
     getUser,
     addUser,
-    getFreeSchedules,
+    getClinics,
+    getSpecialties,
   };
 }

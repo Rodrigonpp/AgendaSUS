@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 // ASSETS
 import agendasus from "../assets/agendasus.svg";
@@ -9,8 +9,12 @@ import { SessionContext } from "../context/SessionContext";
 import "./Header.css";
 
 const Header = () => {
-  const { sessionData, isActive, logout } = useContext(SessionContext);
+  const { sessionData, logout } = useContext(SessionContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!sessionData) navigate("/");
+  }, [sessionData]);
 
   return (
     <header>
@@ -19,7 +23,7 @@ const Header = () => {
           src={agendasus}
           alt="Logo AgendaSUS"
           onClick={() => {
-            if (isActive) {
+            if (sessionData) {
               navigate("/agendar");
             } else {
               navigate("/");
@@ -33,7 +37,7 @@ const Header = () => {
           <span className="blue">SUS</span>
         </h2>
       </div>
-      {isActive ? (
+      {sessionData ? (
         <div className="session-container">
           <div className="greetings-container">
             <span className="greetings" title="Alterar dados pessoais">
@@ -47,6 +51,7 @@ const Header = () => {
               src={logout_icon}
               alt="Encerrar sessão"
               title="Encerrar sessão"
+              onClick={() => logout()}
             />
           </div>
         </div>

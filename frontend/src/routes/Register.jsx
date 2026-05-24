@@ -44,7 +44,6 @@ const Register = () => {
                 },
               };
               addUser(credentials);
-              console.log(credentials);
             }}
           >
             <div className="title-container">

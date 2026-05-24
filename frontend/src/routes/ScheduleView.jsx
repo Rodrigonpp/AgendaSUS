@@ -8,74 +8,101 @@ import { SessionContext } from "../context/SessionContext";
 import "./ScheduleView.css";
 
 const ScheduleView = () => {
+  const navigate = useNavigate();
   const today = new Date().toISOString().split("T")[0];
 
-  const navigate = useNavigate();
   const { sessionData } = useContext(SessionContext);
-  const { getFreeSchedules, freeSchedules } = useBD();
+  const {
+    freeSchedules,
+    getClinics,
+    getSpecialties,
+    clinics,
+    specialties,
+    clinicLoaded,
+    specialtieLoaded,
+  } = useBD();
 
-  // TEMP PAREI AQUI
-  const [agenda_teste, setAgenda_teste] = useState(null);
-  useEffect(async () => {
-    const response = fetch("http://192.168.1.73:8080/api/free_schedules");
-    const data = await response.json();
-    setAgenda_teste(data);
-  }, []);
+  const [specialtieState, setSpecialtieState] = useState("");
+  const [clinicState, setClinicState] = useState("");
+  const [date, setDate] = useState(today);
+
   useEffect(() => {
-    console.log(agenda_teste);
-  }, [agenda_teste]);
+    getSpecialties();
+    getClinics();
+  }, []);
 
   return (
     <div id="schedule-panel">
-      <form id="filter-form">
-        <label htmlFor="specialtie" id="specialtie">
-          <span className="filter-title">
-            Selecione uma especialidade: <span className="required">*</span>
-          </span>
-          <select name="specialtie" id="specialtie-select">
-            {/* Criar um comando para consultar especialidades no banco  - precisa carregar antes da tela*/}
-            <option value="Cardiologia">Cardiologia</option>
-            <option value="Dermatologia">Dermatologia</option>
-            <option value="Pediatria">Pediatria</option>
-            <option value="Ortopedia">Ortopedia</option>
-            <option value="Ginecologia">Ginecologia</option>
-            <option value="Psiquiatria">Psiquiatria</option>
-            <option value="Oftalmologia">Oftalmologia</option>
-            <option value="Neurologia">Neurologia</option>
-            <option value="Endocrinologia">Endocrinologia</option>
-            <option value="Urologia">Urologia</option>
-          </select>
-        </label>
-        <label htmlFor="clinic" id="clinic">
-          <span className="filter-title">Clínica:</span>
-          <select name="clinic" id="clinic-select">
-            {/* Criar um comando para consultar clinicas no banco  - precisa carregar antes da tela*/}
-            <option value="">Clínica Saúde Total</option>
-            <option value="">Centro Médico Vida</option>
-            <option value="">Hospital Santa Helena</option>
-            <option value="">Pronto Socorro Central</option>
-            <option value="">Clínica Bem Estar</option>
-            <option value="">Instituto da Visão</option>
-            <option value="">Clínica Ortopédica Sul</option>
-            <option value="">Centro de Diagnóstico Alpha</option>
-            <option value="">Medicina Integrada</option>
-            <option value="">Hospital do Coração</option>
-          </select>
-        </label>
-        <label htmlFor="date" id="date">
-          <span className="filter-title">
-            Data: <span className="required">*</span>
-          </span>
-          <input type="date" name="date" id="date-input" defaultValue={today} />
-        </label>
-        <button type="submit" className="find-schedules-btn">
-          Consultar agendas
-        </button>
-      </form>
+      {clinicLoaded && specialtieLoaded ? (
+        <form
+          id="filter-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const filterData = {
+              specialtieState: specialtieState,
+              clinicState: clinicState,
+              date: date,
+            };
+            console.log(filterData);
+          }}
+        >
+          <label htmlFor="specialtie" id="specialtie">
+            <span className="filter-title">
+              Selecione uma especialidade: <span className="required">*</span>
+            </span>
+            <select
+              name="specialtie"
+              id="specialtie-select"
+              onChange={(e) => setSpecialtieState(e.target.value)}
+              value={specialtieState}
+            >
+              <option value="">Selecione uma especialidade...</option>
+              {specialties.map((specialtie) => (
+                <option key={specialtie.id} value={specialtie.name}>
+                  {specialtie.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="clinic" id="clinic">
+            <span className="filter-title">Clínica:</span>
+            <select
+              name="clinic"
+              id="clinic-select"
+              onChange={(e) => setClinicState(e.target.value)}
+              value={clinicState}
+            >
+              <option value="">Selecione uma clínica...</option>
+              {clinics.map((clinic) => (
+                <option key={clinic.id} value={clinic.name}>
+                  {clinic.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="date" id="date">
+            <span className="filter-title">
+              Data: <span className="required">*</span>
+            </span>
+            <input
+              type="date"
+              name="date"
+              id="date-input"
+              onChange={(e) => setDate(e.target.value)}
+              value={date}
+            />
+          </label>
+          <button type="submit" className="find-schedules-btn">
+            Consultar agendas
+          </button>
+        </form>
+      ) : (
+        <h2>Carregando...</h2>
+      )}
       <div className="schedules-container">
         <ul className="schedules-list">
-          {agenda_teste ? (
-            agenda_teste.map((agenda) => {
+          {freeSchedules ? (
+            freeSchedules.map((agenda) => {
               const date = new Date(agenda.start_time);
               const weekDay = date
                 .toLocaleDateString("pt-BR", {
