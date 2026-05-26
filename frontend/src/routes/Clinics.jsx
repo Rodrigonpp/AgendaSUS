@@ -11,7 +11,7 @@ const Clinics = () => {
     getClinics();
   }, []);
   return (
-    <div id="schedule-panel">
+    <div id="clinics-container">
       <h2 className="clinics-title">Nossas Unindades</h2>
       <ul className="clinics-list">
         {clinics ? (

@@ -1,3 +1,17 @@
+#clinics-container {
+  display: flex;
+  justify-content: center;
+  margin: 3rem auto;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 10px;
+  border: 2px #2883b5 solid;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  width: 1000px;
+}
+
 .clinics-title {
   color: #2883b5;
   text-align: center;
@@ -9,7 +23,10 @@
   border-radius: 5px;
   margin-top: 1rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 5px;
 }
 
 .loading {

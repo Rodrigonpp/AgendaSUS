@@ -8,9 +8,11 @@ export function useBD() {
   const [freeSchedules, setFreeSchedules] = useState();
   const [clinics, setClinics] = useState(null);
   const [specialties, setSpecialties] = useState({});
+  const [patientSchedules, setPatientSchedules] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [freeSchedulesLoaded, setFreeSchedulesLoaded] = useState(true);
+  const [patientSchedulesLoaded, setPatientSchedulesLoaded] = useState(true);
   const [clinicLoaded, setClinicLoaded] = useState(false);
   const [specialtieLoaded, setSpecialtieLoaded] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -112,6 +114,23 @@ export function useBD() {
     }
   };
 
+  const getPatientSchedules = async (id) => {
+    try {
+      setPatientSchedules(false);
+      const url = `http://${ip}:8080/api/schedule_by_patient/search?patient=${id}`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      console.log(data);
+      setPatientSchedules(data);
+    } catch (error) {
+      console.log("Erro: ", error);
+    } finally {
+      setPatientSchedulesLoaded(true);
+    }
+  };
+
   return {
     users,
     user,
@@ -124,6 +143,7 @@ export function useBD() {
     clinicLoaded,
     specialtieLoaded,
     freeSchedulesLoaded,
+    patientSchedules,
     setIsRegistered,
     setFinished,
     getUsers,
