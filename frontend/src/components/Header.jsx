@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 // ASSETS
 import agendasus from "../assets/agendasus.svg";
 import logout_icon from "../assets/logout.svg";
@@ -11,6 +11,10 @@ import "./Header.css";
 const Header = () => {
   const { sessionData, logout } = useContext(SessionContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isClinics = location.pathname === "/clinicas";
+  const isAppointments = location.pathname === "/agendamentos";
 
   useEffect(() => {
     if (!sessionData) navigate("/");
@@ -45,8 +49,25 @@ const Header = () => {
             </span>
           </div>
           <div className="links-container">
-            <span className="header-links">Nossas unidades</span>
-            <span className="header-links">Seus agendamentos</span>
+            <span
+              className="header-links"
+              onClick={() => navigate("/clinicas")}
+              style={
+                isClinics ? { backgroundColor: "#2883b5", color: "#fff" } : {}
+              }
+            >
+              Nossas unidades
+            </span>
+            <span
+              className="header-links"
+              style={
+                isAppointments
+                  ? { backgroundColor: "#2883b5", color: "#fff" }
+                  : {}
+              }
+            >
+              Seus agendamentos
+            </span>
             <img
               src={logout_icon}
               alt="Encerrar sessão"

@@ -6,10 +6,11 @@ export function useBD() {
   const [users, setUsers] = useState(null);
   const [user, setUser] = useState(null);
   const [freeSchedules, setFreeSchedules] = useState();
-  const [clinics, setClinics] = useState({});
+  const [clinics, setClinics] = useState(null);
   const [specialties, setSpecialties] = useState({});
 
   const [loading, setLoading] = useState(false);
+  const [freeSchedulesLoaded, setFreeSchedulesLoaded] = useState(true);
   const [clinicLoaded, setClinicLoaded] = useState(false);
   const [specialtieLoaded, setSpecialtieLoaded] = useState(false);
   const [finished, setFinished] = useState(false);
@@ -87,11 +88,27 @@ export function useBD() {
       const response = await fetch(`http://${ip}:8080/api/specialties`);
       const data = await response.json();
       setSpecialties(data);
-      console.log(data);
     } catch (error) {
       console.log("Error: ", error);
     } finally {
       setSpecialtieLoaded(true);
+    }
+  };
+
+  const getFreeSchedules = async (filter) => {
+    try {
+      setFreeSchedulesLoaded(false);
+      const url = `http://${ip}:8080/api/filtered_schedules/search?specialtie=${filter.specialtieState}&start_time=${filter.date}&clinic=${filter.clinicState}`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      console.log(data);
+      setFreeSchedules(data);
+    } catch (error) {
+      console.log("Error: ", error);
+    } finally {
+      setFreeSchedulesLoaded(true);
     }
   };
 
@@ -106,6 +123,7 @@ export function useBD() {
     specialties,
     clinicLoaded,
     specialtieLoaded,
+    freeSchedulesLoaded,
     setIsRegistered,
     setFinished,
     getUsers,
@@ -113,5 +131,6 @@ export function useBD() {
     addUser,
     getClinics,
     getSpecialties,
+    getFreeSchedules,
   };
 }

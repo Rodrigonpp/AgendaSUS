@@ -119,3 +119,7 @@ select {
 .date {
   font-family: "Inter", sans-serif;
 }
+
+p {
+  text-align: center;
+}
