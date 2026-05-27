@@ -60,6 +60,7 @@ const Header = () => {
             </span>
             <span
               className="header-links"
+              onClick={() => navigate("/agendamentos")}
               style={
                 isAppointments
                   ? { backgroundColor: "#2883b5", color: "#fff" }

@@ -24,5 +24,5 @@ app.add_url_rule('/api/schedule_by_patient/search', view_func=get_patient_schedu
 app.add_url_rule('/api/clinics', view_func=get_clinics_data, methods=['GET'])
 app.add_url_rule('/api/specialties', view_func=get_specialties_data, methods=['GET'])
     
-app.run(host='192.168.0.58', port=8080)
+app.run(host='192.168.1.73', port=8080)
 

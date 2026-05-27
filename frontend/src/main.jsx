@@ -12,6 +12,7 @@ import Register from "./routes/Register.jsx";
 import Clinics from "./routes/Clinics.jsx";
 import { SessionContextProvider } from "./context/SessionContext.jsx";
 import { IpContextProvider } from "./context/IpContext.jsx";
+import PatientAppointments from "./routes/patientAppointments.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="agendar" element={<ScheduleView />} />
               <Route path="cadastrar" element={<Register />} />
               <Route path="clinicas" element={<Clinics />} />
+              <Route path="agendamentos" element={<PatientAppointments />} />
             </Route>
           </Routes>
         </IpContextProvider>

@@ -1,13 +1,13 @@
 import React from "react";
 
-const FreeSchedules = ({ freeSchedules }) => {
+const Appointments = ({ patientSchedules }) => {
   return (
     <div className="schedules-container">
       <ul className="schedules-list">
-        {!freeSchedules ? (
-          <p>Filtre para encontrar uma consulta.</p>
+        {!patientSchedules || patientSchedules.length < 1 ? (
+          <p>Sem consultas agendadas.</p>
         ) : (
-          freeSchedules.map((agenda) => {
+          patientSchedules.map((agenda) => {
             const date = new Date(agenda.start_time);
             const formatedDate = new Intl.DateTimeFormat("pt-BR", {
               day: "2-digit",
@@ -24,19 +24,29 @@ const FreeSchedules = ({ freeSchedules }) => {
               weekday: "short",
             }).format(date);
 
-            console.log(formatedDate);
-            console.log(start_time);
-            console.log(weekDay);
+            let borderStyle;
+
+            switch (agenda.status) {
+              case "CANCELED":
+                borderStyle = { border: "1px solid #DC143C" };
+                break;
+              case "SCHEDULED":
+                borderStyle = { border: "1px solid #2581B2" };
+                break;
+              case "CONCLUDED":
+                borderStyle = { border: "1px solid #36A26F" };
+                break;
+            }
 
             return (
-              <li key={agenda.id} className="schedule">
+              <li key={agenda.id} className="schedule" style={borderStyle}>
                 <div>
                   <h2 className="doctor">{agenda.doctor}</h2>
                   <span className="specialtie">{agenda.specialtie}</span>
                 </div>
                 <div>
                   <span className="local">Local:</span>
-                  <span className="clinic">{agenda.clinic}</span>
+                  <span className="clinic">{agenda.location}</span>
                 </div>
                 <div className="date-and-time-info">
                   <span className="start-time">{start_time}</span>
@@ -52,4 +62,4 @@ const FreeSchedules = ({ freeSchedules }) => {
   );
 };
 
-export default FreeSchedules;
+export default Appointments;

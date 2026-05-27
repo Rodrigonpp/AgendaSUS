@@ -144,6 +144,7 @@ export function useBD() {
     specialtieLoaded,
     freeSchedulesLoaded,
     patientSchedules,
+    patientSchedulesLoaded,
     setIsRegistered,
     setFinished,
     getUsers,
@@ -152,5 +153,6 @@ export function useBD() {
     getClinics,
     getSpecialties,
     getFreeSchedules,
+    getPatientSchedules,
   };
 }
