@@ -3,6 +3,10 @@
   max-width: 450px;
 }
 
+.login-container {
+  padding: 2rem 3rem;
+}
+
 .register-form {
   display: flex;
   flex-direction: row;

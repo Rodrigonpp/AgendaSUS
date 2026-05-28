@@ -1,4 +1,6 @@
 import React from "react";
+// STYLES
+import "./Appointments.css";
 
 const Appointments = ({ patientSchedules }) => {
   return (
@@ -28,13 +30,13 @@ const Appointments = ({ patientSchedules }) => {
 
             switch (agenda.status) {
               case "CANCELED":
-                borderStyle = { border: "1px solid #DC143C" };
+                borderStyle = { border: "2px solid #DC143C" };
                 break;
               case "SCHEDULED":
-                borderStyle = { border: "1px solid #2581B2" };
+                borderStyle = { border: "2px solid #2581B2" };
                 break;
               case "CONCLUDED":
-                borderStyle = { border: "1px solid #36A26F" };
+                borderStyle = { border: "2px solid #36A26F" };
                 break;
             }
 
@@ -58,6 +60,20 @@ const Appointments = ({ patientSchedules }) => {
           })
         )}
       </ul>
+      <div className="status-info">
+        <div className="info">
+          <div className="color info-blue"></div>
+          <span>Agendado</span>
+        </div>
+        <div className="info">
+          <div className="color info-green"></div>
+          <span>Concluído</span>
+        </div>
+        <div className="info">
+          <div className="color info-red"></div>
+          <span>Cancelado</span>
+        </div>
+      </div>
     </div>
   );
 };
