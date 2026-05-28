@@ -30,13 +30,13 @@ const Appointments = ({ patientSchedules }) => {
 
             switch (agenda.status) {
               case "CANCELED":
-                borderStyle = { border: "2px solid #DC143C" };
+                borderStyle = { border: "3px solid #DC143C" };
                 break;
               case "SCHEDULED":
-                borderStyle = { border: "2px solid #2581B2" };
+                borderStyle = { border: "3px solid #2581B2" };
                 break;
               case "CONCLUDED":
-                borderStyle = { border: "2px solid #36A26F" };
+                borderStyle = { border: "3px solid #36A26F" };
                 break;
             }
 

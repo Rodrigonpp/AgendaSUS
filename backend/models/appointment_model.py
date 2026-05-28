@@ -13,5 +13,3 @@ def do_appointment(patient_id, free_schedule_id):
     except Exception as e:
         db.rollback()
         raise e
-    
-do_appointment(4, 43)

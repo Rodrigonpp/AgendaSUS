@@ -10,6 +10,7 @@ export function useBD() {
   const [specialties, setSpecialties] = useState({});
   const [patientSchedules, setPatientSchedules] = useState(null);
 
+  const [addAppointmentStatus, setAddAppointmentStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [freeSchedulesLoaded, setFreeSchedulesLoaded] = useState(true);
   const [patientSchedulesLoaded, setPatientSchedulesLoaded] = useState(true);
@@ -100,7 +101,10 @@ export function useBD() {
   const getFreeSchedules = async (filter) => {
     try {
       setFreeSchedulesLoaded(false);
-      const url = `http://${ip}:8080/api/filtered_schedules/search?specialtie=${filter.specialtieState}&start_time=${filter.date}&clinic=${filter.clinicState}`;
+      const specialtie = encodeURIComponent(filter.specialtieState);
+      const date = filter.date;
+      const clinic = encodeURIComponent(filter.clinicState);
+      const url = `http://${ip}:8080/api/filtered_schedules/search?specialtie=${specialtie}&start_time=${date}&clinic=${clinic}`;
 
       const response = await fetch(url);
       const data = await response.json();
@@ -131,6 +135,38 @@ export function useBD() {
     }
   };
 
+  const addAppointment = async (patient_id, free_schedule_id, filter) => {
+    setAddAppointmentStatus(null);
+    const data = { patient_id, free_schedule_id };
+    try {
+      const response = await fetch(`http://${ip}:8080/api/add_appointment`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        console.log("Consulta marcada com sucesso");
+        setAddAppointmentStatus("OK");
+      } else {
+        console.log("Erro: ", result.error);
+        setAddAppointmentStatus("NOT OK");
+      }
+    } catch (error) {
+      console.log("Erro na requisição");
+      setAddAppointmentStatus("NETWORK ERROR");
+    } finally {
+      getFreeSchedules(filter);
+      setTimeout(() => {
+        setAddAppointmentStatus(null);
+      }, 5000);
+    }
+  };
+
   return {
     users,
     user,
@@ -145,6 +181,7 @@ export function useBD() {
     freeSchedulesLoaded,
     patientSchedules,
     patientSchedulesLoaded,
+    addAppointmentStatus,
     setIsRegistered,
     setFinished,
     getUsers,
@@ -154,5 +191,6 @@ export function useBD() {
     getSpecialties,
     getFreeSchedules,
     getPatientSchedules,
+    addAppointment,
   };
 }

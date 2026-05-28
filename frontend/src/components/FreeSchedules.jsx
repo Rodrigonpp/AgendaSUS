@@ -1,9 +1,45 @@
-import React from "react";
+// HOOKS
+import { useState, useContext } from "react";
+import { useBD } from "../hooks/useBD";
+// CONTEXTS
+import { SessionContext } from "../context/SessionContext";
 
-const FreeSchedules = ({ freeSchedules }) => {
+const FreeSchedules = ({ freeSchedules, filter, addAppointmentStatus, addAppointment }) => {
+  console.log(filter);
+  const { sessionData } = useContext(SessionContext);
+
+  const appointmentResponse = (status) => {
+    switch (status) {
+      case "OK":
+        return "Consulta marcada com sucesso!";
+        break;
+      case "NOT OK":
+        return "Erro na marcação, tente novamente!";
+        break;
+      case "NETWORK ERROR":
+        return "Erro de conexão. Verifique sua internet!";
+        break;
+      default:
+        return "";
+        break;
+    }
+  };
+
   return (
     <div className="schedules-container">
       <ul className="schedules-list">
+        {addAppointmentStatus && (
+          <p
+            className="appointment-response"
+            style={
+              addAppointmentStatus === "OK"
+                ? { color: "#36a26f" }
+                : { color: "#dc143c" }
+            }
+          >
+            {appointmentResponse(addAppointmentStatus)}
+          </p>
+        )}
         {!freeSchedules ? (
           <p>Filtre para encontrar uma consulta.</p>
         ) : (
@@ -24,12 +60,14 @@ const FreeSchedules = ({ freeSchedules }) => {
               weekday: "short",
             }).format(date);
 
-            console.log(formatedDate);
-            console.log(start_time);
-            console.log(weekDay);
-
             return (
-              <li key={agenda.id} className="schedule">
+              <li
+                key={agenda.id}
+                className="schedule"
+                onDoubleClick={() => {
+                  addAppointment(sessionData.id, agenda.id, filter);
+                }}
+              >
                 <div>
                   <h2 className="doctor">{agenda.doctor}</h2>
                   <span className="specialtie">{agenda.specialtie}</span>

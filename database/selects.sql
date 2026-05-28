@@ -13,11 +13,11 @@ SELECT * FROM notifications;
 SELECT * FROM overview;
 SELECT * FROM history;
 /*VIEWS*/
-SELECT * FROM view_patients;
+SELECT * FROM view_patients; 
 SELECT * FROM view_doctors;
 SELECT * FROM view_all_schedules;
 SELECT * FROM view_free_schedules;
-SELECT * FROM view_appointments ORDER BY patient_name;
+SELECT * FROM view_appointments;
 SELECT * FROM view_notifications;
 SELECT * FROM view_history;
 

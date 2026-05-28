@@ -20,6 +20,8 @@ const ScheduleView = () => {
     clinicLoaded,
     specialtieLoaded,
     freeSchedulesLoaded,
+    addAppointmentStatus,
+    addAppointment,
     getClinics,
     getSpecialties,
     getFreeSchedules,
@@ -28,6 +30,7 @@ const ScheduleView = () => {
   const [specialtieState, setSpecialtieState] = useState("");
   const [clinicState, setClinicState] = useState("");
   const [date, setDate] = useState(today);
+  const [filter, setFilter] = useState(null);
 
   useEffect(() => {
     getSpecialties();
@@ -42,10 +45,11 @@ const ScheduleView = () => {
           onSubmit={(e) => {
             e.preventDefault();
             const filterData = {
-              specialtieState: encodeURIComponent(specialtieState),
-              clinicState: encodeURIComponent(clinicState),
+              specialtieState: specialtieState,
+              clinicState: clinicState,
               date: date,
             };
+            setFilter(filterData);
             getFreeSchedules(filterData);
           }}
         >
@@ -76,9 +80,7 @@ const ScheduleView = () => {
               onChange={(e) => setClinicState(e.target.value)}
               value={clinicState}
             >
-              <option value="">
-                Selecione uma clínica...
-              </option>
+              <option value="">Selecione uma clínica...</option>
               {clinics.map((clinic) => (
                 <option key={clinic.id} value={clinic.name}>
                   {clinic.name}
@@ -106,7 +108,12 @@ const ScheduleView = () => {
         <h2>Carregando...</h2>
       )}
       {freeSchedulesLoaded ? (
-        <FreeSchedules freeSchedules={freeSchedules} />
+        <FreeSchedules
+          freeSchedules={freeSchedules}
+          filter={filter}
+          addAppointment={addAppointment}
+          addAppointmentStatus={addAppointmentStatus}
+        />
       ) : (
         <p>Carregando...</p>
       )}
