@@ -1,6 +1,7 @@
-from flask import jsonify, request
+from flask import jsonify, request, Blueprint
 from models.appointment_model import do_appointment
 
+appointment_bp = Blueprint('appointment', __name__)
 def add_appointment():
     data = request.json
 
@@ -9,3 +10,5 @@ def add_appointment():
         return jsonify({'Mensagem: ': 'Consulta agendada com sucesso.'}), 201
     except Exception as e:
         return jsonify({'Erro: ': str(e)}), 400
+    
+appointment_bp.add_url_rule('/addAppointment', view_func=add_appointment, methods=['POST'])
