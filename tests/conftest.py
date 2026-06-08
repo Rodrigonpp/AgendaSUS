@@ -15,7 +15,6 @@ pasta_backend = os.path.abspath(os.path.join(raiz_projeto, "backend"))
 if pasta_backend not in sys.path:
     sys.path.insert(0, pasta_backend)
 
-# Agora o Python vai encontrar o app.py dentro de backend!
 from App import app as flask_app
 
 @pytest.fixture

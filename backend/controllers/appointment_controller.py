@@ -11,4 +11,4 @@ def add_appointment():
     except Exception as e:
         return jsonify({'Erro: ': str(e)}), 400
     
-appointment_bp.add_url_rule('/addAppointment', view_func=add_appointment, methods=['POST'])
+appointment_bp.add_url_rule('/add_appointment', view_func=add_appointment, methods=['POST'])
