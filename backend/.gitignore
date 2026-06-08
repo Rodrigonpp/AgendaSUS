@@ -4,4 +4,4 @@ lib64
 *.cfg
 include
 exportar.txt
-__pycache__
+**/__pycache__/
