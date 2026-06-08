@@ -1,12 +1,13 @@
-FROM node:20-slim
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 RUN npm install
 
 COPY . .
 
-EXPOSE 5173
+RUN npm run build
 
-CMD ["npm", "run", "dev", "--", "--host"]
+FROM scratch
+COPY --from=builder /app/dist /dist

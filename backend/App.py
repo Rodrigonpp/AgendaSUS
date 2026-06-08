@@ -32,4 +32,4 @@ app.register_blueprint(specialtie_bp, url_prefix='/api')
 #app.add_url_rule('/api/specialties', view_func=get_specialties_data, methods=['GET'])
 
 if __name__ == '__main__':
-    app.run(host='192.168.1.73', port=8080)
+    app.run(host='0.0.0.0', port=8080)
