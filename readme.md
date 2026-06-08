@@ -1,31 +1,32 @@
 # Grupo (3o Período Noite)
+
 - Rodrigo Nunes Peixoto Ramos
 - Daniel Dantas de Farias
 - Ericlys Severino da Silva
 - Márcio José da Silva Morais Junior
 - Othon Henrique Queiroz de Oliveira
 
-
 # Agenda SUS
 
 -Nosso objetivo é conscientizar os usuários a fazer o descarte consciente de seus equipamentos eletronicos.
+
 - Nosso propósito é facilitar a vida dos usuários da saúde pública na região.
 
--No site é  possivel ter informações dos pontos de descarte na região metropolitana, agendamento do coleta de equipamento eletronico que tenha mais de 20kg e informações como pode ser realizada a logistica reversa do seu produto diretamente com o fabricante.
-- No site, é possível filtrar consultas, agendar, verificar as agendadas médicas e verificar as clínicas públicas na região metropolitana do Recife.
+-No site é possivel ter informações dos pontos de descarte na região metropolitana, agendamento do coleta de equipamento eletronico que tenha mais de 20kg e informações como pode ser realizada a logistica reversa do seu produto diretamente com o fabricante.
 
+- No site, é possível filtrar consultas, agendar, verificar as agendadas médicas e verificar as clínicas públicas na região metropolitana do Recife.
 
 ## Utilização
 
 - **Linguagem:** Python
 - **Framework/Biblioteca:** Flask / React
-- **Banco de Dados:** MySQL 
-- **Ferramentas:**  Docker / Git
+- **Banco de Dados:** MySQL
+- **Ferramentas:** Docker / Git
 
 ## Setup do Projeto
 
 1. Criar Virtual Env;
-   
+
 ```bash
 virtualenv <env_name>
 ```
@@ -58,16 +59,20 @@ python app.py
 
 ## Funcionabilidades
 
--Tela Inicial
-![telahome](https://github.com/MartaSantana035/Rec_recycle/assets/138037742/e0489315-0b19-4738-9664-5564b6cb740c)
+-Login
+![telalogin](./docs/assets/login.png)
 
 -Cadastro
-![telacadastro](https://github.com/MartaSantana035/Rec_recycle/assets/138037742/b617d76e-3a41-4e72-b480-72aaa3febff5)
+![telacadastro](./docs/assets/cadastro.png)
+
+-Tela inicial
+![telainicial](./docs/assets/inicial.png)
 
 -Agendamento
-![telaagendamento](https://github.com/MartaSantana035/Rec_recycle/assets/138037742/633994a3-5ecb-4cd8-b8dc-7caea6e89a9a)
+![telaagendamento](./docs/assets/agendamentos.png)
 
--Localização de Descarte
-![teladescarte](https://github.com/MartaSantana035/Rec_recycle/assets/138037742/6d41bd4e-fa8f-424a-af02-a549b50a5cf3)
+-Nossas unidades
+![listaunidades](./docs/assets/clinicas.png)
 
-
+-Consultas agendadas
+![listaconsultas](./docs/assets/agendadas.png)
