@@ -8,13 +8,7 @@
 
 # Agenda SUS
 
--Nosso objetivo é conscientizar os usuários a fazer o descarte consciente de seus equipamentos eletronicos.
-
-- Nosso propósito é facilitar a vida dos usuários da saúde pública na região.
-
--No site é possivel ter informações dos pontos de descarte na região metropolitana, agendamento do coleta de equipamento eletronico que tenha mais de 20kg e informações como pode ser realizada a logistica reversa do seu produto diretamente com o fabricante.
-
-- No site, é possível filtrar consultas, agendar, verificar as agendadas médicas e verificar as clínicas públicas na região metropolitana do Recife.
+- Nosso propósito é facilitar a vida dos usuários da saúde pública na região. No site, é possível filtrar consultas, agendar, verificar as agendadas médicas e verificar as clínicas públicas na região metropolitana do Recife.
 
 ## Utilização
 
