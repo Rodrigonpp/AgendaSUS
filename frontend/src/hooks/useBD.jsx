@@ -102,9 +102,11 @@ export function useBD() {
     try {
       setFreeSchedulesLoaded(false);
       const specialtie = encodeURIComponent(filter.specialtieState);
-      const date = filter.date;
-      const clinic = encodeURIComponent(filter.clinicState);
-      const url = `http://${ip}:8080/api/filtered_schedules/search?specialtie=${specialtie}&start_time=${date}&clinic=${clinic}`;
+      const date = filter.date || "";
+      let url = `http://${ip}:8080/api/filtered_schedules/search?specialtie=${specialtie}&start_time=${date}`;
+      if (filter.clinicState && filter.clinicState !== "undefined") {
+        url += `&clinic=${encodeURIComponent(filter.clinicState)}`;
+      }
 
       const response = await fetch(url);
       const data = await response.json();

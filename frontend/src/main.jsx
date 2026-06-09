@@ -12,7 +12,7 @@ import Register from "./routes/Register.jsx";
 import Clinics from "./routes/Clinics.jsx";
 import { SessionContextProvider } from "./context/SessionContext.jsx";
 import { IpContextProvider } from "./context/IpContext.jsx";
-import PatientAppointments from "./routes/patientAppointments.jsx";
+import PatientAppointments from "./routes/PatientAppointments.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

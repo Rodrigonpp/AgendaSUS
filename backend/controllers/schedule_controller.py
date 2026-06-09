@@ -7,16 +7,21 @@ def get_schedules_data():
     return jsonify(schedules)
 
 def get_filtered_schedules():
+    print("--> ENTOU NO CONTROLLER GET_FILTERED_SCHEDULES!", flush=True)
+    specialtie = request.args.get('specialtie', '').strip()
+    start_time = request.args.get('start_time', '').strip()
+    
     filter = {
-        'specialtie': request.args.get('specialtie'),
-        'start_time': request.args.get('start_time'),
+        'specialtie': specialtie,
+        'start_time': start_time,
     }
 
-    if request.args.get('clinic'):
-        filter['clinic'] = request.args.get('clinic')
+    clinic_arg = request.args.get('clinic')
+    if clinic_arg and clinic_arg not in ['undefined', 'null', '']:
+        filter['clinic'] = clinic_arg.strip()
 
     schedules = get_schedule_by_specialtie_and_date(filter)
-    print(schedules)
+    print("Resultado no Python:", schedules, flush=True)
     return jsonify(schedules)
 
 def get_patient_schedules():

@@ -11,7 +11,6 @@ def get_schedule_by_specialtie_and_date(filter):
     db = get_db_connection()
 
     with db.cursor() as cursor:
-        db.commit()
         if filter.get('clinic'):
             cursor.execute('SELECT * FROM view_free_schedules WHERE specialtie = %s AND start_time >= %s AND clinic = %s', (filter['specialtie'], filter['start_time'], filter['clinic']), )
             return cursor.fetchall()
