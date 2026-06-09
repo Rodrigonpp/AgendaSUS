@@ -123,3 +123,7 @@ select {
 p {
   text-align: center;
 }
+
+.appointment-response {
+  margin-bottom: 1rem;
+}
