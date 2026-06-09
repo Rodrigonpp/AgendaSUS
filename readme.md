@@ -19,37 +19,27 @@
 
 ## Setup do Projeto
 
-1. Criar Virtual Env;
+Para rodar o projeto localmente, foi criado um ambiente empacotado e pronto para ser executado através de um container Docker, sendo ele um **pré-requisito**. Portanto, é necessário ter o **Docker instalado e funcionando**. 
+* [Instalar Docker.](https://www.docker.com/products/docker-desktop/)
 
+#### Executando o Projeto
+
+1. Clonar repositório:
 ```bash
-virtualenv <env_name>
+git clone https://github.com/Rodrigonpp/AgendaSUS
+cd AgendaSUS
 ```
 
-2. Ative o ambiente virtual criado:
-
-2.1 Linux/Mac:
-
+2. Subir o container:
 ```bash
-source <env_name>/bin/activate
+docker compose up --build
 ```
 
-2.2 Windows:
+Pronto! A aplicação está disponível em: [http://localhost:8080](http://localhost:8080) para a própria máquina. Ou no IP da máquina, utilizando também a porta **8080**. Exemplo: `http://192.168.0.10:8080`.
 
-```bash
-<env_name>/bin/activate
-```
+3. Encerrando a aplicação:
+Para encerrar a aplicação, basta usar o comando `Ctrl+C` no seu terminal.
 
-3. Instale as dependências.
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Rodando o projeto.
-
-```bash
-python app.py
-```
 
 ## Funcionabilidades
 
